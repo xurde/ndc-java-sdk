@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class AirShoppingRsUnmarshallingTest {
+public class AirShoppingRsUnmarshallingIT {
 
 	@Parameters(name = "{index}: {0}")
 	public static Collection<Object[]> sampleFiles() {
