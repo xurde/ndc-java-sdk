@@ -12,7 +12,7 @@
 
 	<xsd:attributeGroup name="RequestAttributes">
 		<xsd:attribute name="EchoToken" type="xsd:string"/>
-		<xsd:attribute name="TimeStamp" type="xsd:string"/>
+		<xsd:attribute name="TimeStamp" type="xsd:dateTime"/>
 		<xsd:attribute name="Version" type="xsd:string"/>
 		<xsd:attribute name="TransactionIdentifier" type="xsd:string"/>
 	</xsd:attributeGroup>
