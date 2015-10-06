@@ -159,6 +159,7 @@ ii) Specifying individual Order Item Sets and their associated Offer Item(s). Th
 					</xsd:complexType>
 				</xsd:element>
 			</xsd:sequence>
+			<xsd:attributeGroup ref="RequestAttributes"/>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:element name="OrderCreateParameters" type="OrdCreateParamsType">
