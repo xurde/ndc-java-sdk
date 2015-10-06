@@ -135,10 +135,7 @@ Notes:
 					</xsd:annotation>
 				</xsd:element>
 			</xsd:sequence>
-			<xsd:attribute name="EchoToken" type="xsd:string"/>
-			<xsd:attribute name="TimeStamp" type="xsd:string"/>
-			<xsd:attribute name="Version" type="xsd:string"/>
-			<xsd:attribute name="TransactionIdentifier" type="xsd:string"/>
+			<xsd:attributeGroup ref="RequestAttributes"/>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:complexType name="AirShopRequestType">
