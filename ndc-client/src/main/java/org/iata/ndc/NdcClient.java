@@ -14,6 +14,8 @@ import org.iata.iata.edist.AirShoppingRQ;
 import org.iata.iata.edist.AirShoppingRS;
 
 public class NdcClient {
+	private static final String VERSION = "0.1.0";
+	private static final String USER_AGENT = "NDC Java Wrapper / " + VERSION;
 	private final String uri;
 	private final ContentType contentType;
 
@@ -25,7 +27,7 @@ public class NdcClient {
 	public AirShoppingRS airShopping(AirShoppingRQ airShoppingRQ) throws ClientProtocolException, IOException {
 		//TODO: replace with streams
 		String request = marshallRequest(AirShoppingRQ.class, airShoppingRQ);
-		return sendRequest(request);
+		return sendRequest(request, "AirShopping");
 	}
 
 	private <T> String marshallRequest(Class<T> clazz, T request) {
@@ -40,7 +42,14 @@ public class NdcClient {
 		}
 	}
 
-	private <T> T sendRequest(String request) throws ClientProtocolException, IOException {
-		return Request.Post(uri).bodyString(request, contentType).execute().handleResponse(new UnmarshallingResponseHandler<T>());
+	private <T> T sendRequest(String request, String method) throws ClientProtocolException, IOException {
+		return Request
+				.Post(uri)
+				.userAgent(USER_AGENT)
+				.addHeader("X-NDC-Method", method)
+				.addHeader("Accept", ContentType.APPLICATION_XML.getMimeType())
+				.bodyString(request, contentType)
+				.execute()
+				.handleResponse(new UnmarshallingResponseHandler<T>());
 	}
 }
