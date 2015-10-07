@@ -3,9 +3,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.iata</groupId>
   <artifactId>ndc-client-root</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>0.1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>NDC Wrapper Root pom</name>
+  <name>NDC Client parent POM</name>
   <url>http://www.iata.org</url>
 
   <properties>

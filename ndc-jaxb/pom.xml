@@ -4,15 +4,15 @@
   <parent>
     <groupId>org.iata</groupId>
     <artifactId>ndc-client-root</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.iata</groupId>
   <artifactId>ndc-jaxb</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>JAXB generated classes for NDC client</name>
+  <version>0.1.0-SNAPSHOT</version>
+  <name>JAXB generated classes for NDC Client</name>
 
   <build>
     <plugins>
