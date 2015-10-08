@@ -44,7 +44,7 @@ public class NdcClientIT {
 
 		AirShoppingRQBuilder builder = new AirShoppingRQBuilder();
 		builder.addTravelAgencySender("Test sender", "00002004", "test");
-		builder.addOriginDestination("CDG", "LHR", date);
+		builder.addOriginDestination("CDG", "LHR", date, 3, 3);
 		AirShoppingRQ request = builder.build();
 
 		NdcClient client = new NdcClient(KRONOS);

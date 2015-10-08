@@ -8,6 +8,7 @@ import javax.xml.datatype.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.iata.iata.edist.*;
 import org.iata.iata.edist.AirShopReqAttributeQueryType.OriginDestination;
+import org.iata.iata.edist.AirShopReqAttributeQueryType.OriginDestination.CalendarDates;
 import org.iata.iata.edist.FlightDepartureType.AirportCode;
 import org.iata.iata.edist.MsgPartiesType.Sender;
 import org.iata.iata.edist.TravelerCoreType.PTC;
@@ -80,6 +81,10 @@ public class AirShoppingRQBuilder {
 	}
 
 	public AirShoppingRQBuilder addOriginDestination(String origin, String destination, Date date) {
+		return addOriginDestination(origin, destination, date, 0, 0);
+	}
+
+	public AirShoppingRQBuilder addOriginDestination(String origin, String destination, Date date, int daysBefore, int daysAfter) {
 		OriginDestination originDestination = Initializer.getObject(OriginDestination.class);
 
 		AirportCode airportCode = factory.createFlightDepartureTypeAirportCode();
@@ -88,12 +93,19 @@ public class AirShoppingRQBuilder {
 		originDestination.getArrival().getAirportCode().setValue(destination);
 		originDestination.getDeparture().setDate(getDate(date));
 
+		if( daysBefore != 0 || daysAfter != 0) {
+			CalendarDates dates = factory.createAirShopReqAttributeQueryTypeOriginDestinationCalendarDates();
+			dates.setDaysBefore(daysBefore);
+			dates.setDaysAfter(daysAfter);
+			originDestination.setCalendarDates(dates);
+		}
+
 		return addOriginDestination(originDestination);
 	}
 
+
+
 	public AirShoppingRQ build() {
-
-
 		setDefaults();
 
 		addRequestAttributes();

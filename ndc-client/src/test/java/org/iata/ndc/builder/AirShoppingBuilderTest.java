@@ -1,6 +1,6 @@
 package org.iata.ndc.builder;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.io.StringWriter;
 import java.math.BigInteger;
@@ -76,17 +76,47 @@ public class AirShoppingBuilderTest {
 	}
 
 	@Test
+	public void addOriginDestination() {
+		Date date = Calendar.getInstance().getTime();
+		testedClass.addOriginDestination("Departure", "Arrival", date);
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getCoreQuery().getOriginDestinations().getOriginDestination().size());
+		org.iata.iata.edist.AirShopReqAttributeQueryType.OriginDestination originDestination = request.getCoreQuery().getOriginDestinations().getOriginDestination().get(0);
+		assertEquals("Departure", originDestination.getDeparture().getAirportCode().getValue());
+		assertEquals("Arrival", originDestination.getArrival().getAirportCode().getValue());
+		assertNull("CalendarDates is present", originDestination.getCalendarDates());
+	}
+
+	@Test
+	public void addOriginDestinationWithCalendarDates() {
+		Date date = Calendar.getInstance().getTime();
+		testedClass.addOriginDestination("Departure", "Arrival", date, 1, 2);
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getCoreQuery().getOriginDestinations().getOriginDestination().size());
+		org.iata.iata.edist.AirShopReqAttributeQueryType.OriginDestination originDestination = request.getCoreQuery().getOriginDestinations().getOriginDestination().get(0);
+		assertEquals("Departure", originDestination.getDeparture().getAirportCode().getValue());
+		assertEquals("Arrival", originDestination.getArrival().getAirportCode().getValue());
+		assertNotNull("CalendarDates is not present", originDestination.getCalendarDates());
+		assertEquals(Integer.valueOf(1), originDestination.getCalendarDates().getDaysBefore());
+		assertEquals(Integer.valueOf(2), originDestination.getCalendarDates().getDaysAfter());
+	}
+
+
+	@Test
 	public void createFullRequest() {
 		Calendar cal = Calendar.getInstance();
 		cal.clear();
 		cal.set(2015, 9, 19);
 		Date date = cal.getTime();
 
-		AirShoppingRQ req = testedClass.addTravelAgencySender("Flyiin", "00002004", "flyiin-id")
+		AirShoppingRQ req = testedClass.addTravelAgencySender("Test Agency", "0000XXXX", "Test Agent")
 		.addOriginDestination("CDG", "LHR", date).build();
 
 		System.out.println(toXML(req));
-
 	}
 
 	private static String toXML(AirShoppingRQ request) {
