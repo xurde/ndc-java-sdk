@@ -10,7 +10,6 @@ import java.util.Date;
 
 import javax.xml.bind.*;
 
-import org.apache.http.client.ClientProtocolException;
 import org.iata.iata.edist.AirShoppingRQ;
 import org.iata.iata.edist.AirShoppingRS;
 import org.iata.ndc.builder.AirShoppingRQBuilder;
@@ -52,12 +51,8 @@ public class NdcClientIT {
 		AirShoppingRS response = null;
 		try {
 			response = client.airShopping(request);
-		} catch (ClientProtocolException e) {
-			fail(e.toString());
-			e.printStackTrace();
 		} catch (IOException e) {
 			fail(e.toString());
-			e.printStackTrace();
 		}
 		assertNotNull(response.getSuccess());
 	}
