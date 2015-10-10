@@ -27,6 +27,7 @@
 		<xsd:complexType>
 			<xsd:sequence>
 				<xsd:element ref="Document"/>
+				<xsd:element name="Success"/>
 				<xsd:choice>
 					<xsd:element name="Response">
 						<xsd:annotation>
