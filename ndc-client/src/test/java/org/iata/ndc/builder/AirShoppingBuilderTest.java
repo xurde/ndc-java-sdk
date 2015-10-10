@@ -106,6 +106,12 @@ public class AirShoppingBuilderTest {
 	}
 
 	@Test
+	public void noPreferences() {
+		AirShoppingRQ request = testedClass.build();
+		assertEquals(0, request.getPreference().size());
+	}
+
+	@Test
 	public void addAirlinePreference() {
 		testedClass.addAirlinePreference("A1");
 
@@ -150,18 +156,49 @@ public class AirShoppingBuilderTest {
 		assertEquals("A1", airlinePreference.getAirline().get(0).getAirlineID().getValue());
 	}
 
+	@Test
+	public void addFarePreference() {
+		testedClass.addFarePreference("F1");
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof FarePreferencesType);
+		FarePreferencesType farePreference = (FarePreferencesType) preference;
+		assertEquals(1, farePreference.getTypes().size());
+		assertEquals("F1", farePreference.getTypes().get(0).getCode());
+	}
 
 	@Test
-	public void createFullRequest() {
-		Calendar cal = Calendar.getInstance();
-		cal.clear();
-		cal.set(2015, 9, 19);
-		Date date = cal.getTime();
+	public void addMultipleFarePreferences() {
+		testedClass.addFarePreference("F1");
+		testedClass.addFarePreference("F2");
 
-		AirShoppingRQ req = testedClass.addTravelAgencySender("Test Agency", "0000XXXX", "Test Agent")
-		.addOriginDestination("CDG", "LHR", date).build();
+		AirShoppingRQ request = testedClass.build();
 
-		System.out.println(toXML(req));
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof FarePreferencesType);
+		FarePreferencesType farePreference = (FarePreferencesType) preference;
+		assertEquals(2, farePreference.getTypes().size());
+		assertEquals("F1", farePreference.getTypes().get(0).getCode());
+		assertEquals("F2", farePreference.getTypes().get(1).getCode());
+	}
+
+	@Test
+	public void addMultipleIdenticalFarePreferences() {
+		testedClass.addFarePreference("F1");
+		testedClass.addFarePreference("F1");
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof FarePreferencesType);
+		FarePreferencesType farePreference = (FarePreferencesType) preference;
+		assertEquals(1, farePreference.getTypes().size());
+		assertEquals("F1", farePreference.getTypes().get(0).getCode());
 	}
 
 	private static String toXML(AirShoppingRQ request) {

@@ -8,6 +8,7 @@ import javax.xml.datatype.*;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.iata.iata.edist.*;
 import org.iata.iata.edist.AirShopReqAttributeQueryTypeOriginDestination.CalendarDates;
+import org.iata.iata.edist.FarePreferencesType.Type;
 import org.iata.iata.edist.FlightDepartureType.AirportCode;
 import org.iata.iata.edist.MsgPartiesType.Sender;
 import org.iata.iata.edist.TravelerCoreType.PTC;
@@ -37,12 +38,14 @@ public class AirShoppingRQBuilder {
 	private Map<Traveler, Integer> anonymousTravelers;
 	private Sender sender;
 
-	private Set<String> airlinePreferences;
+	private Set<String> airlines;
+	private Set<String> fares;
 
 
 	public AirShoppingRQBuilder() {
 		anonymousTravelers = new HashMap<AirShoppingRQBuilder.Traveler, Integer>();
-		airlinePreferences = new LinkedHashSet<String>();
+		airlines = new LinkedHashSet<String>();
+		fares = new LinkedHashSet<String>();
 
 		request = Initializer.getObject(AirShoppingRQ.class);
 		sender = null;
@@ -104,7 +107,13 @@ public class AirShoppingRQBuilder {
 
 
 	public AirShoppingRQBuilder addAirlinePreference(String airlineId) {
-		airlinePreferences.add(airlineId);
+		airlines.add(airlineId);
+
+		return this;
+	}
+
+	public AirShoppingRQBuilder addFarePreference(String fareCode) {
+		fares.add(fareCode);
 
 		return this;
 	}
@@ -118,24 +127,38 @@ public class AirShoppingRQBuilder {
 		addTravelers();
 
 		addAirlinePreferences();
+		addFarePreferences();
 
 		return request;
 	}
 
-	private void addAirlinePreferences() {
-		if (airlinePreferences.size() == 0) {
+	private void addFarePreferences() {
+		if (fares.size() == 0) {
 			return;
 		}
-		AirlinePreferencesType preferences = factory.createAirlinePreferencesType();
-		for(String code : airlinePreferences) {
+		FarePreferencesType farePreferences = factory.createFarePreferencesType();
+		for(String code : fares) {
+			Type type = factory.createFarePreferencesTypeType();
+			type.setCode(code);
+			farePreferences.getTypes().add(type);
+		}
+		request.getPreference().add(farePreferences);
+	}
+
+	private void addAirlinePreferences() {
+		if (airlines.size() == 0) {
+			return;
+		}
+		AirlinePreferencesType airlinePreferences = factory.createAirlinePreferencesType();
+		for(String code : airlines) {
 			AirlinePreferencesType.Airline airline = factory.createAirlinePreferencesTypeAirline();
 			AirlineID airlineID = factory.createAirlineID();
 			airlineID.setValue(code);
 			airline.setAirlineID(airlineID);
-			preferences.getAirline().add(airline);
+			airlinePreferences.getAirline().add(airline);
 		}
 
-		request.getPreference().add(preferences);
+		request.getPreference().add(airlinePreferences);
 	}
 
 	private void setDefaults() {
