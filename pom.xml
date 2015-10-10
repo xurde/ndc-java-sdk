@@ -35,7 +35,6 @@
               </goals>
               <configuration>
                 <specVersion>2.1</specVersion>
-		<!--<verbose>true</verbose>-->
                 <episode>false</episode>
                 <extension>true</extension>
                 <args>
