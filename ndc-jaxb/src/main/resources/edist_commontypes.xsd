@@ -7443,34 +7443,40 @@ Example: Male</xsd:documentation>
 						</xsd:complexType>
 					</xsd:element>
 					<xsd:element ref="Remarks" minOccurs="0"/>
-					<xsd:element name="FOID" minOccurs="0">
-						<xsd:annotation>
-							<xsd:documentation source="description" xml:lang="en">Passenger Form of Identification.
-
-Note: This is the type of FOID as defined in IATA AIRIMP.</xsd:documentation>
-						</xsd:annotation>
+					<xsd:element name="PassengerIDInfo" minOccurs="0">
 						<xsd:complexType>
-							<xsd:complexContent>
-								<xsd:extension base="KeyWithMetaObjectBaseType">
-									<xsd:sequence>
-										<xsd:element name="Type">
-											<xsd:annotation>
-												<xsd:documentation source="description" xml:lang="en">ID form. Examples: PP (passport), CC (credit card), FF (frequent flyer), DL (drivers license)</xsd:documentation>
-											</xsd:annotation>
-										</xsd:element>
-										<xsd:element name="ID">
-											<xsd:annotation>
-												<xsd:documentation source="description" xml:lang="en">FOID ID value. Example: NY122345</xsd:documentation>
-											</xsd:annotation>
-										</xsd:element>
-										<xsd:element name="Issuer">
-											<xsd:annotation>
-												<xsd:documentation source="description" xml:lang="en">Owner/ Issuer of FOID. Example: US Passport Control</xsd:documentation>
-											</xsd:annotation>
-										</xsd:element>
-									</xsd:sequence>
-								</xsd:extension>
-							</xsd:complexContent>
+							<xsd:sequence>
+								<xsd:element name="FOID" minOccurs="0">
+									<xsd:annotation>
+										<xsd:documentation source="description" xml:lang="en">Passenger Form of Identification.
+
+											Note: This is the type of FOID as defined in IATA AIRIMP.</xsd:documentation>
+									</xsd:annotation>
+									<xsd:complexType>
+										<xsd:complexContent>
+											<xsd:extension base="KeyWithMetaObjectBaseType">
+												<xsd:sequence>
+													<xsd:element name="Type">
+														<xsd:annotation>
+															<xsd:documentation source="description" xml:lang="en">ID form. Examples: PP (passport), CC (credit card), FF (frequent flyer), DL (drivers license)</xsd:documentation>
+														</xsd:annotation>
+													</xsd:element>
+													<xsd:element name="ID">
+														<xsd:annotation>
+															<xsd:documentation source="description" xml:lang="en">FOID ID value. Example: NY122345</xsd:documentation>
+														</xsd:annotation>
+													</xsd:element>
+													<xsd:element name="Issuer" minOccurs="0">
+														<xsd:annotation>
+															<xsd:documentation source="description" xml:lang="en">Owner/ Issuer of FOID. Example: US Passport Control</xsd:documentation>
+														</xsd:annotation>
+													</xsd:element>
+												</xsd:sequence>
+											</xsd:extension>
+										</xsd:complexContent>
+									</xsd:complexType>
+								</xsd:element>
+							</xsd:sequence>
 						</xsd:complexType>
 					</xsd:element>
 				</xsd:sequence>
