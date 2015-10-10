@@ -282,7 +282,7 @@ Note: This contains references to Passenger and Group instance(s) defined in the
 										</xsd:sequence>
 									</xsd:complexType>
 								</xsd:element>
-								<xsd:element name="DataList" type="DataListType" minOccurs="0">
+								<xsd:element name="DataLists" type="DataListType" minOccurs="0">
 									<xsd:annotation>
 										<xsd:documentation>Data List(s)</xsd:documentation>
 									</xsd:annotation>
