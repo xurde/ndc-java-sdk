@@ -41,6 +41,7 @@ Request sample
 AirShoppingRQBuilder builder = new AirShoppingRQBuilder();
 builder.addTravelAgencySender("Test agency", "0000XXXX", "test agent");
 builder.addOriginDestination("CDG", "LHR", date);
+builder.addAirlinePreference("C9");
 AirShoppingRQ request = builder.build();
 
 NdcClient client = new NdcClient("http://kronos.jrtechnologies.com/dondc");
