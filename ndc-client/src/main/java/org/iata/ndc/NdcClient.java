@@ -10,8 +10,7 @@ import org.apache.http.Consts;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
-import org.iata.iata.edist.AirShoppingRQ;
-import org.iata.iata.edist.AirShoppingRS;
+import org.iata.iata.edist.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -29,8 +28,12 @@ public class NdcClient {
 
 	public AirShoppingRS airShopping(AirShoppingRQ airShoppingRQ) throws ClientProtocolException, IOException {
 		String request = marshallRequest(AirShoppingRQ.class, airShoppingRQ);
-		LOG.debug("AirShopping request:\n{}", request);
 		return sendRequest(request, "AirShopping");
+	}
+
+	public OrderViewRS createOrder(OrderCreateRQ orderCreateRQ) throws ClientProtocolException, IOException {
+		String request = marshallRequest(OrderCreateRQ.class, orderCreateRQ);
+		return sendRequest(request, "OrderCreate");
 	}
 
 	private <T> String marshallRequest(Class<T> clazz, T request) {
@@ -47,6 +50,7 @@ public class NdcClient {
 	}
 
 	private <T> T sendRequest(String request, String method) throws ClientProtocolException, IOException {
+		LOG.debug("{} request:\n{}", method, request);
 		return Request
 				.Post(uri)
 				.userAgent(USER_AGENT)
