@@ -297,6 +297,7 @@ Note: This contains references to Passenger and Group instance(s) defined in the
 					<xsd:element ref="Errors"/>
 				</xsd:choice>
 			</xsd:sequence>
+			<xsd:attribute name="Version" type="xsd:string"/>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:element name="OrderViewProcessing" type="OrderViewProcessType">
