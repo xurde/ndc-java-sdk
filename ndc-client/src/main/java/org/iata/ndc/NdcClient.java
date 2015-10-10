@@ -12,8 +12,11 @@ import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
 import org.iata.iata.edist.AirShoppingRQ;
 import org.iata.iata.edist.AirShoppingRS;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class NdcClient {
+	private static final Logger LOG = LoggerFactory.getLogger(NdcClient.class);
 	private static final String VERSION = "0.1.0";
 	private static final String USER_AGENT = "NDC Java Wrapper / " + VERSION;
 	private final String uri;
@@ -25,8 +28,8 @@ public class NdcClient {
 	}
 
 	public AirShoppingRS airShopping(AirShoppingRQ airShoppingRQ) throws ClientProtocolException, IOException {
-		//TODO: replace with streams
 		String request = marshallRequest(AirShoppingRQ.class, airShoppingRQ);
+		LOG.debug("AirShopping request:\n{}", request);
 		return sendRequest(request, "AirShopping");
 	}
 
@@ -34,6 +37,7 @@ public class NdcClient {
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
 			Marshaller marshaller = context.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			StringWriter writer = new StringWriter();
 			marshaller.marshal(request, writer);
 			return writer.toString();
