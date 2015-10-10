@@ -8,7 +8,6 @@ import java.util.*;
 
 import javax.xml.bind.*;
 
-import org.iata.iata.edist.AirShopReqAttributeQueryType.OriginDestination;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -49,7 +48,7 @@ public class AirShoppingRqUnmarshallingIT {
 			JAXBContext context = JAXBContext.newInstance(AirShoppingRQ.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			AirShoppingRQ airShoppingRQ =  (AirShoppingRQ) unmarshaller.unmarshal(is);
-			List<OriginDestination> originDestinations = airShoppingRQ.getCoreQuery().getOriginDestinations().getOriginDestination();
+			List<AirShopReqAttributeQueryTypeOriginDestination> originDestinations = airShoppingRQ.getCoreQuery().getOriginDestinations();
 			assertEquals(arrivalAirport, originDestinations.get(0).getArrival().getAirportCode().getValue());
 		} catch (JAXBException e) {
 			e.printStackTrace();

@@ -7,8 +7,7 @@ import javax.xml.datatype.*;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.iata.iata.edist.*;
-import org.iata.iata.edist.AirShopReqAttributeQueryType.OriginDestination;
-import org.iata.iata.edist.AirShopReqAttributeQueryType.OriginDestination.CalendarDates;
+import org.iata.iata.edist.AirShopReqAttributeQueryTypeOriginDestination.CalendarDates;
 import org.iata.iata.edist.FlightDepartureType.AirportCode;
 import org.iata.iata.edist.MsgPartiesType.Sender;
 import org.iata.iata.edist.TravelerCoreType.PTC;
@@ -37,6 +36,7 @@ public class AirShoppingRQBuilder {
 
 	private Map<Traveler, Integer> anonymousTravelers;
 	private Sender sender;
+	private List<AirShopReqAttributeQueryTypeOriginDestination> originDestinations;
 
 
 	public AirShoppingRQBuilder() {
@@ -71,12 +71,8 @@ public class AirShoppingRQBuilder {
 		return this;
 	}
 
-	public AirShoppingRQBuilder addOriginDestination(OriginDestination originDestination) {
-		if (request.getCoreQuery().getOriginDestinations() == null) {
-			request.getCoreQuery().setOriginDestinations(factory.createAirShopReqAttributeQueryType());
-		}
-		request.getCoreQuery().getOriginDestinations().getOriginDestination()
-		.add(originDestination);
+	public AirShoppingRQBuilder addOriginDestination(AirShopReqAttributeQueryTypeOriginDestination originDestination) {
+		request.getCoreQuery().getOriginDestinations().add(originDestination);
 		return this;
 	}
 
@@ -85,7 +81,7 @@ public class AirShoppingRQBuilder {
 	}
 
 	public AirShoppingRQBuilder addOriginDestination(String origin, String destination, Date date, int daysBefore, int daysAfter) {
-		OriginDestination originDestination = Initializer.getObject(OriginDestination.class);
+		AirShopReqAttributeQueryTypeOriginDestination originDestination = Initializer.getObject(AirShopReqAttributeQueryTypeOriginDestination.class);
 
 		AirportCode airportCode = factory.createFlightDepartureTypeAirportCode();
 		originDestination.getDeparture().setAirportCode(airportCode);
@@ -131,18 +127,15 @@ public class AirShoppingRQBuilder {
 	}
 
 	private void addTravelers() {
-		Travelers travelers = factory.createTravelers();
-
 		for (Traveler t: anonymousTravelers.keySet()) {
-			Travelers.Traveler traveler = factory.createTravelersTraveler();
+			org.iata.iata.edist.TravelersTraveler traveler = factory.createTravelersTraveler();
 			traveler.setAnonymousTraveler(factory.createAnonymousTravelerType());
 			PTC ptc = factory.createTravelerCoreTypePTC();
 			ptc.setValue(t.name());
 			ptc.setQuantity(BigInteger.valueOf(anonymousTravelers.get(t)));
 			traveler.getAnonymousTraveler().setPTC(ptc);
-			travelers.getTraveler().add(traveler);
+			request.getTravelers().add(traveler);
 		}
-		request.setTravelers(travelers);
 	}
 
 	private void addDocumentNode() {
