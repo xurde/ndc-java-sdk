@@ -5820,6 +5820,13 @@ Encoding Scheme: IATA/ A4A (two or three character) Airline Designator Code</xsd
 																					</xsd:sequence>
 																				</xsd:complexType>
 																			</xsd:element>
+																			<xsd:element name="ApplicableFlight">
+																				<xsd:complexType>
+																					<xsd:sequence>
+																						<xsd:element ref="OriginDestinationReferences"/>
+																					</xsd:sequence>
+																				</xsd:complexType>
+																			</xsd:element>
 																			<xsd:element name="AssociatedServices" minOccurs="0">
 																				<xsd:annotation>
 																					<xsd:documentation>Associated Service Item(s).</xsd:documentation>
