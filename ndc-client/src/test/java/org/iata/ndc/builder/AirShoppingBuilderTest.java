@@ -201,6 +201,51 @@ public class AirShoppingBuilderTest {
 		assertEquals("F1", farePreference.getTypes().get(0).getCode());
 	}
 
+	@Test
+	public void addCabinPreference() {
+		testedClass.addCabinPreference("A");
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof CabinPreferencesType);
+		CabinPreferencesType cabinPreference = (CabinPreferencesType) preference;
+		assertEquals(1, cabinPreference.getCabinType().size());
+		assertEquals("A", cabinPreference.getCabinType().get(0).getCode());
+	}
+
+	@Test
+	public void addMultipleCabinPreferences() {
+		testedClass.addCabinPreference("A");
+		testedClass.addCabinPreference("B");
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof CabinPreferencesType);
+		CabinPreferencesType cabinPreference = (CabinPreferencesType) preference;
+		assertEquals(2, cabinPreference.getCabinType().size());
+		assertEquals("A", cabinPreference.getCabinType().get(0).getCode());
+		assertEquals("B", cabinPreference.getCabinType().get(1).getCode());
+	}
+
+	@Test
+	public void addMultipleIdenticalCabinPreferences() {
+		testedClass.addCabinPreference("A");
+		testedClass.addCabinPreference("A");
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof CabinPreferencesType);
+		CabinPreferencesType cabinPreference = (CabinPreferencesType) preference;
+		assertEquals(1, cabinPreference.getCabinType().size());
+		assertEquals("A", cabinPreference.getCabinType().get(0).getCode());
+	}
+
 	private static String toXML(AirShoppingRQ request) {
 		JAXBContext context;
 		try {

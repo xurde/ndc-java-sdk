@@ -40,12 +40,14 @@ public class AirShoppingRQBuilder {
 
 	private Set<String> airlines;
 	private Set<String> fares;
+	private Set<String> cabins;
 
 
 	public AirShoppingRQBuilder() {
 		anonymousTravelers = new HashMap<AirShoppingRQBuilder.Traveler, Integer>();
 		airlines = new LinkedHashSet<String>();
 		fares = new LinkedHashSet<String>();
+		cabins = new LinkedHashSet<String>();
 
 		request = Initializer.getObject(AirShoppingRQ.class);
 		sender = null;
@@ -118,6 +120,12 @@ public class AirShoppingRQBuilder {
 		return this;
 	}
 
+	public AirShoppingRQBuilder addCabinPreference(String cabinCode) {
+		cabins.add(cabinCode);
+
+		return this;
+	}
+
 	public AirShoppingRQ build() {
 		setDefaults();
 
@@ -128,8 +136,22 @@ public class AirShoppingRQBuilder {
 
 		addAirlinePreferences();
 		addFarePreferences();
+		addCabinPreferences();
 
 		return request;
+	}
+
+	private void addCabinPreferences() {
+		if (cabins.size() == 0) {
+			return;
+		}
+		CabinPreferencesType cabinPreferencesType = factory.createCabinPreferencesType();
+		for (String code: cabins) {
+			CabinType cabin = factory.createCabinType();
+			cabin.setCode(code);
+			cabinPreferencesType.getCabinType().add(cabin);
+		}
+		request.getPreference().add(cabinPreferencesType);
 	}
 
 	private void addFarePreferences() {
@@ -137,7 +159,7 @@ public class AirShoppingRQBuilder {
 			return;
 		}
 		FarePreferencesType farePreferences = factory.createFarePreferencesType();
-		for(String code : fares) {
+		for (String code : fares) {
 			Type type = factory.createFarePreferencesTypeType();
 			type.setCode(code);
 			farePreferences.getTypes().add(type);
@@ -150,7 +172,7 @@ public class AirShoppingRQBuilder {
 			return;
 		}
 		AirlinePreferencesType airlinePreferences = factory.createAirlinePreferencesType();
-		for(String code : airlines) {
+		for (String code : airlines) {
 			AirlinePreferencesType.Airline airline = factory.createAirlinePreferencesTypeAirline();
 			AirlineID airlineID = factory.createAirlineID();
 			airlineID.setValue(code);
