@@ -24888,7 +24888,7 @@ Note: This is the carrier whose air waybill or ticket is issued (see Resolution 
 		<xsd:complexContent>
 			<xsd:extension base="KeyWithMetaObjectBaseType">
 				<xsd:sequence>
-					<xsd:element name="Price">
+					<xsd:element name="Price" minOccurs="0">
 						<xsd:annotation>
 							<xsd:documentation source="description" xml:lang="en">Flight Pricing.</xsd:documentation>
 						</xsd:annotation>
