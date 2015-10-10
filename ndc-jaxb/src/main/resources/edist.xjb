@@ -2,13 +2,18 @@
 <jaxb:bindings version="2.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-	<jaxb:bindings schemaLocation="edist_structures.xsd" node="/xs:schema"> 
-
+	<jaxb:bindings schemaLocation="edist_structures.xsd" node="/xs:schema">
 		<jaxb:bindings node="//xs:complexType[@name='KeyWithMetaObjectBaseType']">
 			<jaxb:bindings node=".//xs:attribute[@name='Time']">
 				<jaxb:property name="timeAttribute"/>
 			</jaxb:bindings>
 		</jaxb:bindings>
-
 	</jaxb:bindings>
+
+	<jaxb:bindings schemaLocation="OrderViewRS.xsd" node="/xs:schema">
+		<jaxb:bindings node="//xs:element[@name='PriceVariance']/xs:complexType/xs:sequence/xs:element[@name='PriceVariance']/xs:complexType">
+			<jaxb:class name="PriceVariances"/>
+		</jaxb:bindings>
+	</jaxb:bindings>
+
 </jaxb:bindings>
