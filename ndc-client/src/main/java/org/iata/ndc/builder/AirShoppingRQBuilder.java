@@ -36,11 +36,14 @@ public class AirShoppingRQBuilder {
 
 	private Map<Traveler, Integer> anonymousTravelers;
 	private Sender sender;
-	private List<AirShopReqAttributeQueryTypeOriginDestination> originDestinations;
+
+	private Set<String> airlinePreferences;
 
 
 	public AirShoppingRQBuilder() {
 		anonymousTravelers = new HashMap<AirShoppingRQBuilder.Traveler, Integer>();
+		airlinePreferences = new LinkedHashSet<String>();
+
 		request = Initializer.getObject(AirShoppingRQ.class);
 		sender = null;
 	}
@@ -100,6 +103,11 @@ public class AirShoppingRQBuilder {
 	}
 
 
+	public AirShoppingRQBuilder addAirlinePreference(String airlineId) {
+		airlinePreferences.add(airlineId);
+
+		return this;
+	}
 
 	public AirShoppingRQ build() {
 		setDefaults();
@@ -109,7 +117,25 @@ public class AirShoppingRQBuilder {
 		addPartyNode();
 		addTravelers();
 
+		addAirlinePreferences();
+
 		return request;
+	}
+
+	private void addAirlinePreferences() {
+		if (airlinePreferences.size() == 0) {
+			return;
+		}
+		AirlinePreferencesType preferences = factory.createAirlinePreferencesType();
+		for(String code : airlinePreferences) {
+			AirlinePreferencesType.Airline airline = factory.createAirlinePreferencesTypeAirline();
+			AirlineID airlineID = factory.createAirlineID();
+			airlineID.setValue(code);
+			airline.setAirlineID(airlineID);
+			preferences.getAirline().add(airline);
+		}
+
+		request.getPreference().add(preferences);
 	}
 
 	private void setDefaults() {
@@ -140,7 +166,7 @@ public class AirShoppingRQBuilder {
 
 	private void addDocumentNode() {
 		MsgDocumentType document = factory.createMsgDocumentType();
-		document.setName("Java wrapper AirShoppingRQ Message");
+		document.setName("NDC AirShoppingRQ Message");
 		document.setReferenceVersion("1.0");
 		request.setDocument(document);
 	}

@@ -26,7 +26,7 @@ public class AirShoppingBuilderTest {
 	public void documentNode() {
 		AirShoppingRQ request = testedClass.build();
 		assertEquals("1.0", request.getDocument().getReferenceVersion());
-		assertEquals("Java wrapper AirShoppingRQ Message", request.getDocument().getName());
+		assertEquals("NDC AirShoppingRQ Message", request.getDocument().getName());
 	}
 
 	@Test
@@ -103,6 +103,51 @@ public class AirShoppingBuilderTest {
 		assertNotNull("CalendarDates is not present", originDestination.getCalendarDates());
 		assertEquals(Integer.valueOf(1), originDestination.getCalendarDates().getDaysBefore());
 		assertEquals(Integer.valueOf(2), originDestination.getCalendarDates().getDaysAfter());
+	}
+
+	@Test
+	public void addAirlinePreference() {
+		testedClass.addAirlinePreference("A1");
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof AirlinePreferencesType);
+		AirlinePreferencesType airlinePreference = (AirlinePreferencesType) preference;
+		assertEquals(1, airlinePreference.getAirline().size());
+		assertEquals("A1", airlinePreference.getAirline().get(0).getAirlineID().getValue());
+	}
+
+	@Test
+	public void addMultipleAirlinePreferences() {
+		testedClass.addAirlinePreference("A1");
+		testedClass.addAirlinePreference("A2");
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof AirlinePreferencesType);
+		AirlinePreferencesType airlinePreference = (AirlinePreferencesType) preference;
+		assertEquals(2, airlinePreference.getAirline().size());
+		assertEquals("A1", airlinePreference.getAirline().get(0).getAirlineID().getValue());
+		assertEquals("A2", airlinePreference.getAirline().get(1).getAirlineID().getValue());
+	}
+
+	@Test
+	public void addMultipleIdenticalAirlinePreferences() {
+		testedClass.addAirlinePreference("A1");
+		testedClass.addAirlinePreference("A1");
+
+		AirShoppingRQ request = testedClass.build();
+
+		assertEquals(1, request.getPreference().size());
+		Object preference = request.getPreference().get(0);
+		assertTrue(preference instanceof AirlinePreferencesType);
+		AirlinePreferencesType airlinePreference = (AirlinePreferencesType) preference;
+		assertEquals(1, airlinePreference.getAirline().size());
+		assertEquals("A1", airlinePreference.getAirline().get(0).getAirlineID().getValue());
 	}
 
 
