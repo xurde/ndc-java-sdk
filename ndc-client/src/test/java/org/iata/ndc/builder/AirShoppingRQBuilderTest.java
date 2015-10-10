@@ -14,7 +14,7 @@ import org.iata.ndc.builder.AirShoppingRQBuilder.Traveler;
 import org.junit.Before;
 import org.junit.Test;
 
-public class AirShoppingBuilderTest {
+public class AirShoppingRQBuilderTest {
 	private AirShoppingRQBuilder testedClass;
 
 	@Before
