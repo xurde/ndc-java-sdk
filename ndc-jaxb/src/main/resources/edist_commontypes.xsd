@@ -2124,7 +2124,15 @@ Note: This may contain just a simple, un-structured phone number, such as +01 99
 			<xsd:documentation source="description" xml:lang="en">ADDRESS CONTACT definition.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexContent>
-			<xsd:extension base="StructuredAddrType"/>
+			<xsd:extension base="StructuredAddrType">
+				<xsd:sequence>
+					<xsd:element name="Application" type="ContactAppSimpleType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation source="description" xml:lang="en">Address application. Examples: AddressAtOrigin</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+				</xsd:sequence>
+			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
 	<xsd:complexType name="PhoneContactType">
