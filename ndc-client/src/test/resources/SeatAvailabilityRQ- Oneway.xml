@@ -1,0 +1,109 @@
+<SeatAvailabilityRQ xmlns="http://www.iata.org/IATA/EDIST" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.iata.org/IATA/EDIST ../SeatAvailabilityRQ.xsd" EchoToken="8fdb1c621a7a4454aa3360556e7784d5" TimeStamp="2015-02-01T12:38:00Z" Version="1.1.5" TransactionIdentifier="TRN12345">
+	<Document>
+		<Name>NDC GATEWAY</Name>
+		<ReferenceVersion>1.0</ReferenceVersion>
+	</Document>
+	<Party>
+		<Sender>
+			<AgentUserSender>
+				<AgentUserID>JRT</AgentUserID>
+			</AgentUserSender>
+		</Sender>
+	</Party>
+	<Query>
+		<OriginDestination>
+			<OriginDestinationReferences>OID1</OriginDestinationReferences>
+		</OriginDestination>
+	</Query>
+	<DataLists>
+		<FlightSegmentList>
+					<FlightSegment SegmentKey="SEG1">
+				<Departure>
+					<AirportCode>BCN</AirportCode>
+					<Date>2016-04-06</Date>
+					<Time>12:45</Time>
+					<AirportName>Barcelona Airport</AirportName>
+				</Departure>
+				<Arrival>
+					<AirportCode>FRA</AirportCode>
+					<Date>2016-04-06</Date>
+					<Time>14:55</Time>
+					<AirportName>Frankfurt International</AirportName>
+				</Arrival>
+				<MarketingCarrier>
+					<AirlineID>C9</AirlineID>
+					<Name>Kronos Airlines</Name>
+					<FlightNumber>1127</FlightNumber>
+				</MarketingCarrier>
+				<OperatingCarrier>
+					<AirlineID>C9</AirlineID>
+					<Name>Kronos Airlines</Name>
+					<FlightNumber>1127</FlightNumber> 
+				</OperatingCarrier>
+				<Equipment>
+					<AircraftCode>321</AircraftCode>
+					<Name>321 - AIRBUS INDUSTRIE A321 JET</Name>
+				</Equipment>
+								<ClassOfService>
+					<Code>M</Code>
+				</ClassOfService>
+				<FlightDetail>
+					<FlightDuration>
+						<Value>PT2H10M</Value>
+					</FlightDuration>
+				</FlightDetail>
+			</FlightSegment>
+	<FlightSegment SegmentKey="SEG2">
+				<Departure>
+					<AirportCode>FRA</AirportCode>
+					<Date>2016-04-06</Date>
+					<Time>16:15</Time>
+					<AirportName>Frankfurt International</AirportName>
+				</Departure>
+				<Arrival>
+					<AirportCode>PRG</AirportCode>
+					<Date>2016-04-06</Date>
+					<Time>17:15</Time>
+					<AirportName>Prague Ruzyne</AirportName>
+				</Arrival>
+				<MarketingCarrier>
+					<AirlineID>C9</AirlineID>
+					<Name>Kronos Airlines</Name>
+					<FlightNumber>1398</FlightNumber>
+				</MarketingCarrier>
+				<OperatingCarrier>
+					<AirlineID>C9</AirlineID>
+					<Name>Kronos Airlines</Name>
+					<FlightNumber>1398</FlightNumber>
+				</OperatingCarrier>
+				<Equipment>
+					<AircraftCode>733</AircraftCode>
+					<Name>733 - BOEING JET</Name>
+				</Equipment>
+								<ClassOfService>
+					<Code>C</Code>
+				</ClassOfService>
+				<FlightDetail>
+					<FlightDuration>
+						<Value>PT1H0M</Value>
+					</FlightDuration>
+				</FlightDetail>
+			</FlightSegment>
+		</FlightSegmentList>
+		<FlightList>
+			<Flight FlightKey="FL1">
+				<Journey>
+					<Time>PT17H55M</Time>
+				</Journey>
+				<SegmentReferences>SEG1 SEG2</SegmentReferences>
+			</Flight>
+		</FlightList>
+		<OriginDestinationList>
+			<OriginDestination OriginDestinationKey="OID1">
+				<DepartureCode>BCN</DepartureCode>
+				<ArrivalCode>PRG</ArrivalCode>
+				<FlightReferences>FL1</FlightReferences>
+			</OriginDestination>
+		</OriginDestinationList>
+	</DataLists>
+</SeatAvailabilityRQ>
