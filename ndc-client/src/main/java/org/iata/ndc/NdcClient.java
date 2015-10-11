@@ -46,6 +46,11 @@ public class NdcClient {
 		return sendRequest(request, "SeatAvailability");
 	}
 
+	public ServiceListRS serviceList(ServiceListRQ serviceListRQ) throws ClientProtocolException, IOException {
+		String request = marshallRequest(ServiceListRQ.class, serviceListRQ);
+		return sendRequest(request, "ServiceList");
+	}
+
 	private <T> String marshallRequest(Class<T> clazz, T request) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
