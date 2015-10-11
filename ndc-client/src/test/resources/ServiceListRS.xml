@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceListRS xmlns="http://www.iata.org/IATA/EDIST" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Version="String" xsi:schemaLocation="http://www.iata.org/IATA/EDIST ServiceListRS.xsd">
+	<Document>
+		<Name>NDC GATEWAY</Name>
+		<ReferenceVersion>1.0</ReferenceVersion>
+	</Document>
+	<Success/>
+	<DataLists>
+		<AnonymousTravelerList>
+			<AnonymousTraveler ObjectKey="PAX1">
+				<PTC Quantity="1">ADT</PTC>
+			</AnonymousTraveler>
+			<AnonymousTraveler ObjectKey="PAX2">
+				<PTC Quantity="1">CHD</PTC>
+			</AnonymousTraveler>
+			<AnonymousTraveler ObjectKey="PAX3">
+				<PTC Quantity="1">INF</PTC>
+			</AnonymousTraveler>
+		</AnonymousTravelerList>
+		<ServiceBundleList>
+			<ServiceBundle ListKey="BD1">
+				<ItemCount>5</ItemCount>
+				<Associations>
+					<ServiceReference>SV6</ServiceReference>
+					<ServiceReference>SV7</ServiceReference>
+					<ServiceReference>SV8</ServiceReference>
+					<ServiceReference>SV9</ServiceReference>
+					<ServiceReference>SV10</ServiceReference>
+				</Associations>
+				<Selection>
+					<MaximumQuantity>3</MaximumQuantity>
+				</Selection>
+				<BundleID>B1018</BundleID>
+			</ServiceBundle>
+			<ServiceBundle ListKey="BD2">
+				<ItemCount>3</ItemCount>
+				<Associations>
+					<ServiceReference>SV8</ServiceReference>
+					<ServiceReference>SV9</ServiceReference>
+					<ServiceReference>SV10</ServiceReference>
+				</Associations>
+				<Selection>
+					<MaximumQuantity>2</MaximumQuantity>
+				</Selection>
+				<BundleID>B1017</BundleID>
+			</ServiceBundle>
+		</ServiceBundleList>
+		<ServiceList>
+			<Service ObjectKey="SV1">
+				<ServiceID Owner="9A">1052</ServiceID>
+				<Name>Baggage</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>BG</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>20 kg Baggage Allowance</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="EUR">170</Total>
+					<PassengerReferences>PAX1</PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV2">
+				<ServiceID Owner="9A">1053</ServiceID>
+				<Name>Complimentary Meal</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>ML</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Complimentary three course meal and drinks</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/1_boeuf_Promo.jpg</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="AED">0</Total>
+					<PassengerReferences>PAX1 PAX2 PAX3 </PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV3">
+				<ServiceID Owner="9A">1054</ServiceID>
+				<Name>InFlight</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>IE</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>31in seat pitch (78cm)</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/comfort-eco-dom-1_title.jpg</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="EUR">170</Total>
+					<PassengerReferences>PAX1</PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV4">
+				<ServiceID Owner="9A">1055</ServiceID>
+				<Name>Meal/Beverage</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>ML</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Asian vegetarian meal</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="EUR">150</Total>
+					<PassengerReferences>PAX1</PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV5">
+				<ServiceID Owner="9A">1056</ServiceID>
+				<Name>Seat</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>EN</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>ADVANCED SÉAT SELECTION</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="EUR">150</Total>
+					<PassengerReferences>PAX1</PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV6">
+				<ServiceID Owner="C9">1057</ServiceID>
+				<Name>Seat</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>OC</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>ADVANCED SÉAT SELECTION</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="EUR">150</Total>
+					<PassengerReferences>PAX1</PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV7">
+				<ServiceID Owner="C9">1058</ServiceID>
+				<Name>Meal/Beverage</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>ML</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Asian vegetarian meal</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="AED">0</Total>
+					<PassengerReferences>PAX1 PAX2 PAX3 </PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV8">
+				<ServiceID Owner="C9">1059</ServiceID>
+				<Name>InFlight</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>IE</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>31in seat pitch (78cm)</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="EUR">170</Total>
+					<PassengerReferences>PAX1</PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV9">
+				<ServiceID Owner="C9">1060</ServiceID>
+				<Name>Complimentary Meal</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>ML</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>Complimentary three course meal and drinks</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="AED">0</Total>
+					<PassengerReferences>PAX1 PAX2 PAX3 </PassengerReferences>
+				</Price>
+			</Service>
+			<Service ObjectKey="SV10">
+				<ServiceID Owner="C9">1061</ServiceID>
+				<Name>Baggage</Name>
+				<Encoding>
+					<RFIC>
+						<Code>NA</Code>
+					</RFIC>
+					<Code>BG</Code>
+				</Encoding>
+				<Descriptions>
+					<Description>
+						<Text>20 kg Baggage Allowance</Text>
+						<Link>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</Link>
+						<Media>
+							<ObjectID>iconerror.png</ObjectID>
+						</Media>
+						<Media>
+							<MediaLink>http://uat.jrtechnologies.in/ServiceImage/iconerror.png</MediaLink>
+						</Media>
+					</Description>
+				</Descriptions>
+				<Settlement>
+					<Method>
+						<Code>AD</Code>
+					</Method>
+				</Settlement>
+				<Price>
+					<Total Code="EUR">170</Total>
+					<PassengerReferences>PAX1</PassengerReferences>
+				</Price>
+			</Service>
+		</ServiceList>
+	</DataLists>
+</ServiceListRS>
