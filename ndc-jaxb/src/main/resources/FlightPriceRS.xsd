@@ -22,6 +22,7 @@ If no ancillary services are available, the message returns a final pricing. If 
 			<xsd:choice>
 				<xsd:sequence>
 					<xsd:element ref="Document"/>
+					<xsd:element name="Success"/>
 					<xsd:element name="Processing" type="ProcessingResultType" minOccurs="0"/>
 					<xsd:element name="Parameters" type="FltPriceResParamsType" minOccurs="0">
 						<xsd:annotation>
