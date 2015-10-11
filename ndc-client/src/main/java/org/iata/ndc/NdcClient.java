@@ -41,6 +41,11 @@ public class NdcClient {
 		return sendRequest(request, "FlightPrice");
 	}
 
+	public SeatAvailabilityRS seatAvailability(SeatAvailabilityRQ seatAvailabilityRQ) throws ClientProtocolException, IOException {
+		String request = marshallRequest(SeatAvailabilityRQ.class, seatAvailabilityRQ);
+		return sendRequest(request, "SeatAvailability");
+	}
+
 	private <T> String marshallRequest(Class<T> clazz, T request) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
