@@ -21062,8 +21062,8 @@ Examples: Display, Requested, Spoken, Written, Other</xsd:documentation>
 				</xsd:element>
 			</xsd:sequence>
 			<!--			<xsd:choice>-->
-				<xsd:element ref="OriginDestinationReferences"/>
-				<xsd:element ref="FlightReferences"/>
+				<xsd:element ref="OriginDestinationReferences" minOccurs="0"/>
+				<xsd:element ref="FlightReferences" minOccurs="0"/>
 				<xsd:element ref="FlightSegmentReference" minOccurs="0" maxOccurs="unbounded"/>
 				<!--	 </xsd:choice>-->
 		</xsd:sequence>
