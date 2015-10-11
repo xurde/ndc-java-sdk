@@ -85,6 +85,7 @@ Notes:
 					</xsd:annotation>
 				</xsd:element>
 			</xsd:sequence>
+			<xsd:attributeGroup ref="RequestAttributes"/>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:complexType name="SeatAvailReqParamsType">
