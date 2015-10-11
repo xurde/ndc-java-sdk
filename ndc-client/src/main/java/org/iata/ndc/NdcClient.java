@@ -36,6 +36,11 @@ public class NdcClient {
 		return sendRequest(request, "OrderCreate");
 	}
 
+	public FlightPriceRS flightPrice(FlightPriceRQ flightPriceRQ) throws ClientProtocolException, IOException {
+		String request = marshallRequest(FlightPriceRQ.class, flightPriceRQ);
+		return sendRequest(request, "FlightPrice");
+	}
+
 	private <T> String marshallRequest(Class<T> clazz, T request) {
 		try {
 			JAXBContext context = JAXBContext.newInstance(clazz);
