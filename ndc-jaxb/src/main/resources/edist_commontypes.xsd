@@ -32984,30 +32984,21 @@ Examples: TotalJourneyTime, MaximumTravelTime</xsd:documentation>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	<xsd:element name="Preferences">
+	<xsd:element name="Preference">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">Shopping Preference(s), including Airline Supplier, Alliance Program, Fare, Flight and Transfer/ Connection Points.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexType>
-			<xsd:sequence>
-				<xsd:element name="Preference" maxOccurs="unbounded">
-					<xsd:annotation>
-						<xsd:documentation source="description" xml:lang="en">Preference choices.</xsd:documentation>
-					</xsd:annotation>
-					<xsd:complexType>
 						<xsd:sequence>
-							<xsd:element ref="AirlinePreferences"/>
-							<xsd:element ref="AlliancePreferences"/>
-							<xsd:element ref="FarePreferences"/>
-							<xsd:element ref="FlightPreferences"/>
-							<xsd:element ref="PricingMethodPreference"/>
-							<xsd:element ref="SegMaxTimePreferences"/>
-							<xsd:element ref="ServicePricingOnlyPreference"/>
-							<xsd:element ref="TransferPreferences"/>
+							<xsd:element ref="AirlinePreferences" minOccurs="0"/>
+							<xsd:element ref="AlliancePreferences" minOccurs="0"/>
+							<xsd:element ref="FarePreferences" minOccurs="0"/>
+							<xsd:element ref="FlightPreferences" minOccurs="0"/>
+							<xsd:element ref="PricingMethodPreference" minOccurs="0"/>
+							<xsd:element ref="SegMaxTimePreferences" minOccurs="0"/>
+							<xsd:element ref="ServicePricingOnlyPreference" minOccurs="0"/>
+							<xsd:element ref="TransferPreferences" minOccurs="0"/>
 						</xsd:sequence>
-					</xsd:complexType>
-				</xsd:element>
-			</xsd:sequence>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:element name="PreferenceGroup" abstract="true">

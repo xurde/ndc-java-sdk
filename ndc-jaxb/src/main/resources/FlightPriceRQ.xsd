@@ -58,7 +58,7 @@ Note: These capabilities may not be supported by all NDC-enabled systems or may 
 						</xsd:complexType>
 					</xsd:element>
 				</xsd:choice>
-				<xsd:element ref="Preferences" minOccurs="0"/>
+				<xsd:element ref="Preference" minOccurs="0"/>
 				<xsd:element ref="Qualifiers" minOccurs="0"/>
 				<xsd:element name="JourneyData" type="ItineraryType" minOccurs="0">
 					<xsd:annotation>
