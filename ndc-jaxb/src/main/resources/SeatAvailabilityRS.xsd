@@ -22,6 +22,7 @@ The message also returns multi-media content at the message level with media con
 			<xsd:choice>
 				<xsd:sequence>
 					<xsd:element ref="Document"/>
+					<xsd:element name="Success"/>
 					<xsd:element name="Processing" type="ProcessingResultType" minOccurs="0"/>
 					<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
 					<xsd:element name="Parameters" type="SeatAvailResParamsType" minOccurs="0">
