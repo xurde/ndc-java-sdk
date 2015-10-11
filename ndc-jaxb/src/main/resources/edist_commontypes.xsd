@@ -21073,7 +21073,7 @@ Examples: Display, Requested, Spoken, Written, Other</xsd:documentation>
 			<xsd:documentation>Specific structure for providing flight associations, would typically associate to flights from a Data List.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element ref="OriginDestinationReference"/>
+			<xsd:element ref="OriginDestinationReference" minOccurs="0"/>
 			<xsd:element ref="FlightReferences" minOccurs="0"/>
 			<xsd:element ref="FlightSegmentReferences" minOccurs="0"/>
 		</xsd:sequence>
