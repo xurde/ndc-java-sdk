@@ -39,7 +39,7 @@ Note: These capabilities may not be supported by all NDC-enabled systems or may 
 1) Cached Shopping Offer IDs
 2) Detailed Query Parameters</xsd:documentation>
 					</xsd:annotation>
-					<xsd:element ref="ShoppingResponseIDs"/>
+					<xsd:element ref="ShoppingResponseID"/>
 					<xsd:element name="Query">
 						<xsd:annotation>
 							<xsd:documentation source="Description" xml:lang="en">Core Service List query parameters.</xsd:documentation>
