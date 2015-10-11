@@ -292,7 +292,7 @@ Note: Taxes may still apply.</xsd:documentation>
 								</xsd:attribute>
 							</xsd:complexType>
 						</xsd:element>
-						<xsd:element ref="OfferItemID"/>
+						<xsd:element name="OfferID" type="ItemID_Type"/>
 						<xsd:element name="OfferPrice" type="OfferPriceLeadType" maxOccurs="unbounded">
 							<xsd:annotation>
 								<xsd:documentation source="description" xml:lang="en">Fare Offer and Lead Calendar Pricing information.</xsd:documentation>
