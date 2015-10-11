@@ -16,13 +16,13 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class FlightPriceRqUnmarshallingIT {
+public class FlightPriceRsUnmarshallingIT {
 
 	@Parameters(name = "{index}: {0} {1}")
 	public static Collection<String[]> sampleFiles() {
 		return Arrays.asList(new String[][] {
-			{"/FlightPriceRQ - OneWay.xml", "BCN"},
-			{"/FlightPriceRQ - RoundTrip.xml", "ARN"}
+			{"/FlightPriceRS - OneWay.xml", "BCN"},
+			{"/FlightPriceRS - RoundTrip.xml", "ARN"}
 		});
 	}
 
@@ -36,11 +36,11 @@ public class FlightPriceRqUnmarshallingIT {
 	public void unmarshal() {
 		InputStream is = this.getClass().getResourceAsStream(resource);
 		try {
-			JAXBContext context = JAXBContext.newInstance(FlightPriceRQ.class);
+			JAXBContext context = JAXBContext.newInstance(FlightPriceRS.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			FlightPriceRQ flightPriceRQ =  (FlightPriceRQ) unmarshaller.unmarshal(is);
+			FlightPriceRS flightPriceRS =  (FlightPriceRS) unmarshaller.unmarshal(is);
 
-			assertEquals(departure, flightPriceRQ.getQuery().get(0).getFlight().get(0).getDeparture().getAirportCode().getValue());
+			assertEquals(departure, flightPriceRS.getDataLists().getOriginDestinationList().get(0).getDepartureCode().getValue());
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			fail(e.toString());
