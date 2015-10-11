@@ -31,7 +31,7 @@ If no ancillary services are available, the message returns a final pricing. If 
 Note: These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. The technical implementation of this capability is not dictated by this specification. </xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
+					<xsd:element ref="ShoppingResponseID" minOccurs="0"/>
 					<xsd:element name="PricedFlightOffers" minOccurs="0">
 						<xsd:annotation>
 							<xsd:documentation>PRICED FLIGHT Airline Offer(s).</xsd:documentation>
