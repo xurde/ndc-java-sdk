@@ -29477,6 +29477,10 @@ MV (Row With Movie Screen)
 Encoding Scheme: IATA PADIS Code List for data element 9864 - Row Characteristic</xsd:documentation>
 							</xsd:annotation>
 						</xsd:element>
+					</xsd:sequence>
+					<xsd:attributeGroup ref="ObjAssociationAttrGroup"/>
+				</xsd:complexType>
+			</xsd:element>
 						<xsd:element name="Characteristics" minOccurs="0">
 							<xsd:annotation>
 								<xsd:documentation source="description" xml:lang="en">Seat row Characteristic(s).</xsd:documentation>
@@ -29520,10 +29524,6 @@ Encoding Scheme: IATA PADIS Code List for data element 9825 - Seat Characteristi
 								</xsd:complexContent>
 							</xsd:complexType>
 						</xsd:element>
-					</xsd:sequence>
-					<xsd:attributeGroup ref="ObjAssociationAttrGroup"/>
-				</xsd:complexType>
-			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
 	<xsd:complexType name="SeatCharacteristicType">
