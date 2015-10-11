@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by Atul Bhabal (JR Technologies, Inc.) -->
+<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by Rastko Ilic (JR Technologies, Inc.) -->
 <!-- Notice: This is NDC Draft Specification provided for pre-review by the members of the relevant governance groups, it is not provided for implementation in a production environment or considered to be the final  schema to support NDC business  requirements. The draft schema may, at any time up to final specification submission, undergo changes including, but not limited to, specific elements, element names/labels, annotations or message name as a result of the ongoing quality control process, and comments, which may be received following the pre-review. Implementation of this version is done so at the risk of the implementer or implementing company.
 -->
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2014.2" id="NDC2014.2">
@@ -8,68 +8,30 @@
 	<!--
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / =
-      SE A T   A V A I L A B I L I T Y   R E S P O N S E   B U S I N E S S   O B J E C T
+     S E R V I C E   L I S T   R E S P O N S E   B U S I N E S S   O B J E C T
 = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / = / =
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 -->
-	<xsd:element name="SeatAvailabilityRS">
+	<xsd:element name="ServiceListRS">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">The SeatAvailability transaction set returns data used to construct respective seat maps with fully integrated fees for any identified premium seats.
+			<xsd:documentation source="DESCRIPTION" xml:lang="en">The ServiceList transaction set returns a list of all applicable ancillary services that meet request qualifiers and flights.
 
-The message also returns multi-media content at the message level with media content references at the individual service level.</xsd:documentation>
+The message supports shopping for additional a la carte services to compliment any selected offer, as well as shopping for specialty service items not generally included in an initial offer but rather based on service search filters, e.g. sports equipment specialty baggage and unaccompanied minor fees.
+
+The message also returns multi-media content at the message level and media references at the individual service level.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexType>
 			<xsd:choice>
 				<xsd:sequence>
 					<xsd:element ref="Document"/>
-					<xsd:element name="Success"/>
 					<xsd:element name="Processing" type="ProcessingResultType" minOccurs="0"/>
 					<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
-					<xsd:element name="Parameters" type="SeatAvailResParamsType" minOccurs="0">
+					<xsd:element name="Parameters" type="SrvListResParamsType" minOccurs="0">
 						<xsd:annotation>
 							<xsd:documentation source="description" xml:lang="en">Search Result Parameters that influence overall message results.
 
 Note: These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. The technical implementation of this capability is not dictated by this specification. </xsd:documentation>
 						</xsd:annotation>
-					</xsd:element>
-					<xsd:element name="Flights" maxOccurs="unbounded">
-						<xsd:annotation>
-							<xsd:documentation>Flight Information.</xsd:documentation>
-						</xsd:annotation>
-						<xsd:complexType>
-							<xsd:complexContent>
-								<xsd:extension base="SimpleFlightAssocType">
-									<xsd:sequence>
-										<xsd:element name="Cabin" maxOccurs="unbounded">
-											<xsd:annotation>
-												<xsd:documentation>Aircraft cabin information.</xsd:documentation>
-											</xsd:annotation>
-											<xsd:complexType>
-												<xsd:complexContent>
-													<xsd:extension base="AircraftCabinType">
-														<xsd:sequence>
-															<xsd:element name="CabinLayout" minOccurs="0">
-																<xsd:annotation>
-																	<xsd:documentation source="description" xml:lang="en">Cabin Layout information, including Exit Row Position(s), Over the Wing Row Positions and other (non-seat) Cabin Components.</xsd:documentation>
-																</xsd:annotation>
-																<xsd:complexType>
-																	<xsd:sequence>
-																		<xsd:element ref="WingPosition" minOccurs="0" maxOccurs="unbounded"/>
-																		<xsd:element ref="ExitRowPosition" minOccurs="0" maxOccurs="unbounded"/>
-																	</xsd:sequence>
-																</xsd:complexType>
-															</xsd:element>
-															<xsd:element ref="SeatDisplay" minOccurs="0"/>
-															<xsd:element ref="SeatReference" minOccurs="0" maxOccurs="unbounded"/>
-														</xsd:sequence>
-													</xsd:extension>
-												</xsd:complexContent>
-											</xsd:complexType>
-										</xsd:element>
-									</xsd:sequence>
-								</xsd:extension>
-							</xsd:complexContent>
-						</xsd:complexType>
 					</xsd:element>
 					<xsd:element name="Services" minOccurs="0">
 						<xsd:annotation>
@@ -95,10 +57,15 @@ Note: These capabilities may not be supported by all NDC-enabled systems or may 
 							<xsd:documentation>Data Lists(s).</xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<xsd:element name="Metadata" type="SeatAvailResMetadataType" minOccurs="0">
+					<xsd:element name="Metadata" minOccurs="0">
 						<xsd:annotation>
 							<xsd:documentation>Metadata List(s).</xsd:documentation>
 						</xsd:annotation>
+						<xsd:complexType>
+							<xsd:complexContent>
+								<xsd:extension base="SrvListResMetadataType"/>
+							</xsd:complexContent>
+						</xsd:complexType>
 					</xsd:element>
 					<xsd:element ref="Policies" minOccurs="0">
 						<xsd:annotation>
@@ -112,9 +79,9 @@ Note: These capabilities may not be supported by all NDC-enabled systems or may 
 			</xsd:choice>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:complexType name="SeatAvailResParamsType">
+	<xsd:complexType name="SrvListResParamsType">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Seat Availability Response Message Parameters.</xsd:documentation>
+			<xsd:documentation source="description" xml:lang="en">Service List Response Message Parameters.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:complexContent>
 			<xsd:extension base="MessageParamsBaseType">
@@ -241,9 +208,9 @@ Notes:
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	<xsd:complexType name="SeatAvailResMetadataType">
+	<xsd:complexType name="SrvListResMetadataType">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Seat Availability Response Metadata definition.</xsd:documentation>
+			<xsd:documentation source="description" xml:lang="en">Service List Response Metadata definition.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element name="Shopping" minOccurs="0">
