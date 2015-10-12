@@ -89,6 +89,7 @@ Notes:
 					</xsd:annotation>
 				</xsd:element>
 			</xsd:sequence>
+			<xsd:attribute name="Version" type="xsd:string"/>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:complexType name="SrvPriceReqParamsType">
