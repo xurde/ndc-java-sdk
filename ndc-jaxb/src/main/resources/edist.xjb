@@ -22,4 +22,9 @@
 		</jaxb:bindings>
 	</jaxb:bindings>
 
+	<jaxb:bindings schemaLocation="AirShoppingRQ.xsd" node="/xs:schema">
+		<jaxb:bindings node="/xs:schema/xs:element[@name='KeywordPreferences']/xs:complexType">
+			<jaxb:class name="KeywordPrefs"/>
+		</jaxb:bindings>
+	</jaxb:bindings>
 </jaxb:bindings>
