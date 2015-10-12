@@ -22,6 +22,7 @@ The response message returns pricing of seat/services meeting the request qualif
 			<xsd:choice>
 				<xsd:sequence>
 					<xsd:element ref="Document"/>
+					<xsd:element name="Success"/>
 					<xsd:element name="Processing" type="ServicePriceProcessType" minOccurs="0"/>
 					<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
 					<xsd:element name="Parameters" type="SrvPriceResParamsType" minOccurs="0">
