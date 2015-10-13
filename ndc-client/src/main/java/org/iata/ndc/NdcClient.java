@@ -19,10 +19,12 @@ public class NdcClient {
 	private static final String VERSION = "0.1.0";
 	private static final String USER_AGENT = "NDC Java Wrapper / " + VERSION;
 	private final String uri;
+	private final String key;
 	private final ContentType contentType;
 
-	public NdcClient(String serviceURI) {
+	public NdcClient(String serviceURI, String authorizationKey) {
 		this.uri = serviceURI;
+		this.key = authorizationKey;
 		this.contentType = ContentType.create(ContentType.APPLICATION_XML.getMimeType(), Consts.UTF_8);
 	}
 
@@ -74,6 +76,7 @@ public class NdcClient {
 		return Request
 				.Post(uri)
 				.userAgent(USER_AGENT)
+				.addHeader("Authorization-key", key)
 				.addHeader("X-NDC-Method", method)
 				.addHeader("Accept", ContentType.APPLICATION_XML.getMimeType())
 				.bodyString(request, contentType)

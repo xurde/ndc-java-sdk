@@ -10,6 +10,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <!--<api.key>insert your api key here or specify system property when running integration tests</api.key>-->
+    <test.server.url>http://iata.api.mashery.com/kronos/api</test.server.url>
   </properties>
 
   <build>
@@ -58,6 +60,12 @@
           <groupId>org.apache.maven.plugins</groupId>
           <artifactId>maven-failsafe-plugin</artifactId>
           <version>2.18.1</version>
+          <configuration>
+            <systemPropertyVariables>
+              <server.url>${test.server.url}</server.url>
+              <api.key>${api.key}</api.key>
+            </systemPropertyVariables>
+          </configuration>
           <executions>
             <execution>
               <id>integration-test</id>
