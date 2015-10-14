@@ -97,7 +97,13 @@ Notes:
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
-				<xsd:element name="Preference" minOccurs="0">
+				<xsd:element name="Preferences" minOccurs="0">
+					<xsd:annotation>
+						<xsd:documentation source="description" xml:lang="en">Shopping Preference(s), including Airline Supplier, Alliance Program, Fare, Flight and Transfer/ Connection Points.</xsd:documentation>
+					</xsd:annotation>
+					<xsd:complexType>
+						<xsd:sequence>
+							<xsd:element name="Preference" maxOccurs="unbounded">
 								<xsd:annotation>
 									<xsd:documentation source="description" xml:lang="en">Preference choices.
 
@@ -118,6 +124,9 @@ Notes:
 										<xsd:element ref="CabinPreferences"/>
 									</xsd:choice>
 								</xsd:complexType>
+							</xsd:element>
+						</xsd:sequence>
+					</xsd:complexType>
 				</xsd:element>
 				<xsd:element name="Metadata" minOccurs="0">
 					<xsd:annotation>

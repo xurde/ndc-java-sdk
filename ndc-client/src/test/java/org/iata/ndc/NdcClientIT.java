@@ -55,7 +55,7 @@ public class NdcClientIT {
 			LOG.error("Unexpected exception encountered during service call", e);
 			fail(e.toString());
 		}
-		assertNotNull(response);
+		assertNotNull(response.getSuccess());
 	}
 
 	@Test

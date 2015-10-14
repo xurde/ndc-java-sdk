@@ -9,6 +9,7 @@ import java.util.*;
 import javax.xml.bind.*;
 
 import org.iata.iata.edist.*;
+import org.iata.iata.edist.AirShoppingRQ.Preference;
 import org.iata.iata.edist.TravelerCoreType.PTC;
 import org.iata.ndc.builder.AirShoppingRQBuilder.Traveler;
 import org.junit.Before;
@@ -108,7 +109,7 @@ public class AirShoppingRQBuilderTest {
 	@Test
 	public void noPreferences() {
 		AirShoppingRQ request = testedClass.build();
-		assertEquals(0, request.getPreference().size());
+		assertEquals(0, request.getPreferences().size());
 	}
 
 	@Test
@@ -117,8 +118,8 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof AirlinePreferencesType);
 		AirlinePreferencesType airlinePreference = (AirlinePreferencesType) preference;
 		assertEquals(1, airlinePreference.getAirline().size());
@@ -132,8 +133,8 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof AirlinePreferencesType);
 		AirlinePreferencesType airlinePreference = (AirlinePreferencesType) preference;
 		assertEquals(2, airlinePreference.getAirline().size());
@@ -148,8 +149,8 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof AirlinePreferencesType);
 		AirlinePreferencesType airlinePreference = (AirlinePreferencesType) preference;
 		assertEquals(1, airlinePreference.getAirline().size());
@@ -162,8 +163,8 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof FarePreferencesType);
 		FarePreferencesType farePreference = (FarePreferencesType) preference;
 		assertEquals(1, farePreference.getTypes().size());
@@ -177,8 +178,8 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof FarePreferencesType);
 		FarePreferencesType farePreference = (FarePreferencesType) preference;
 		assertEquals(2, farePreference.getTypes().size());
@@ -193,8 +194,8 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof FarePreferencesType);
 		FarePreferencesType farePreference = (FarePreferencesType) preference;
 		assertEquals(1, farePreference.getTypes().size());
@@ -207,8 +208,8 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof CabinPreferencesType);
 		CabinPreferencesType cabinPreference = (CabinPreferencesType) preference;
 		assertEquals(1, cabinPreference.getCabinType().size());
@@ -222,8 +223,8 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof CabinPreferencesType);
 		CabinPreferencesType cabinPreference = (CabinPreferencesType) preference;
 		assertEquals(2, cabinPreference.getCabinType().size());
@@ -238,12 +239,17 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		assertEquals(1, request.getPreference().size());
-		Object preference = request.getPreference().get(0);
+		assertEquals(1, request.getPreferences().size());
+		Object preference = getPreference(request, 0);
 		assertTrue(preference instanceof CabinPreferencesType);
 		CabinPreferencesType cabinPreference = (CabinPreferencesType) preference;
 		assertEquals(1, cabinPreference.getCabinType().size());
 		assertEquals("A", cabinPreference.getCabinType().get(0).getCode());
+	}
+
+	private Object getPreference(AirShoppingRQ request, int  id) {
+		Preference preference = request.getPreferences().get(id);
+		return preference.getAirlinePreferencesOrAlliancePreferencesOrFarePreferences().get(0);
 	}
 
 	private static String toXML(AirShoppingRQ request) {

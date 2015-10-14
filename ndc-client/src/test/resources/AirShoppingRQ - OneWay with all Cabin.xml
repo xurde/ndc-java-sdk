@@ -77,6 +77,7 @@
       </OriginDestination>
     </OriginDestinations>
   </CoreQuery>
+  <Preferences>
   <Preference>
     <AirlinePreferences>
       <Airline>
@@ -84,6 +85,7 @@
       </Airline>
     </AirlinePreferences>
   </Preference>
+  </Preferences>
   <Metadata>
     <Other>
       <OtherMetadata>
