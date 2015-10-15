@@ -1,4 +1,4 @@
-package org.iata.iata.edist;
+package org.iata.ndc.schema;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -9,7 +9,6 @@ import java.util.Collection;
 
 import javax.xml.bind.*;
 
-import org.iata.iata.edist.ShoppingResponseOrderType.Offer;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -17,13 +16,12 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class OrderCreateRqUnmarshallingIT {
+public class SeatAvailabilityRqUnmarshallingIT {
 
 	@Parameters(name = "{index}: {0} {1}")
 	public static Collection<String[]> sampleFiles() {
 		return Arrays.asList(new String[][] {
-			{"/OrderCreateRQ - OneWay with one pax.xml", "1#C#109987187#110031494"},
-			{"/OrderCreateRQ - RoundTrip with one pax.xml", "1#M#108183266"}
+			{"/SeatAvailabilityRQ- Oneway.xml", "BCN"}
 		});
 	}
 
@@ -31,17 +29,16 @@ public class OrderCreateRqUnmarshallingIT {
 	public String resource;
 
 	@Parameter(value=1)
-	public String offerItemID;
+	public String departure;
 
 	@Test
 	public void unmarshal() {
 		InputStream is = this.getClass().getResourceAsStream(resource);
 		try {
-			JAXBContext context = JAXBContext.newInstance(OrderCreateRQ.class);
+			JAXBContext context = JAXBContext.newInstance(SeatAvailabilityRQ.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			OrderCreateRQ orderCreateRQ =  (OrderCreateRQ) unmarshaller.unmarshal(is);
-			Offer offer = orderCreateRQ.getQuery().getOrderItems().getShoppingResponse().getOffers().get(0);
-			assertEquals(offerItemID, offer.getOfferItems().get(0).getOfferItemID().getValue());
+			SeatAvailabilityRQ seatAvailabilityRQ =  (SeatAvailabilityRQ) unmarshaller.unmarshal(is);
+			assertEquals(departure, seatAvailabilityRQ.getDataList().getFlightSegmentList().get(0).getDeparture().getAirportCode().getValue());
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			fail(e.toString());

@@ -1,9 +1,10 @@
-package org.iata.iata.edist;
+package org.iata.ndc.schema;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -16,13 +17,12 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class ServiceListRsUnmarshallingIT {
+public class ServicePriceRsUnmarshallingIT {
 
 	@Parameters(name = "{index}: {0}")
-	public static Collection<String[]> sampleFiles() {
-		return Arrays.asList(new String[][] {
-			{"/ServiceListRS.xml", "Baggage"},
-			{"/ServiceListRS-Updated(14-Aug-2015).xml", "Baggage"}
+	public static Collection<Object[]> sampleFiles() {
+		return Arrays.asList(new Object[][] {
+			{"/ServicePriceRS.xml", BigDecimal.valueOf(170)}
 		});
 	}
 
@@ -30,16 +30,16 @@ public class ServiceListRsUnmarshallingIT {
 	public String resource;
 
 	@Parameter(value=1)
-	public String service;
+	public BigDecimal expectedAmount;
 
 	@Test
 	public void unmarshal() {
 		InputStream is = this.getClass().getResourceAsStream(resource);
 		try {
-			JAXBContext context = JAXBContext.newInstance(ServiceListRS.class);
+			JAXBContext context = JAXBContext.newInstance(ServicePriceRS.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			ServiceListRS serviceListRS =  (ServiceListRS) unmarshaller.unmarshal(is);
-			assertEquals(service, serviceListRS.getDataLists().getServiceList().get(0).getName().value);
+			ServicePriceRS servicePrice =  (ServicePriceRS) unmarshaller.unmarshal(is);
+			assertEquals(expectedAmount, servicePrice.getDataLists().getServiceList().get(0).getPrice().get(0).getTotal().value);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			fail(e.toString());

@@ -1,10 +1,9 @@
-package org.iata.iata.edist;
+package org.iata.ndc.schema;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 
@@ -17,12 +16,12 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class ServicePriceRsUnmarshallingIT {
+public class ServicePriceRqUnmarshallingIT {
 
 	@Parameters(name = "{index}: {0}")
-	public static Collection<Object[]> sampleFiles() {
-		return Arrays.asList(new Object[][] {
-			{"/ServicePriceRS.xml", BigDecimal.valueOf(170)}
+	public static Collection<String[]> sampleFiles() {
+		return Arrays.asList(new String[][] {
+			{"/ServicePriceRQ.xml", "REeda594f0d2a740b9a6d210dd463cc987"}
 		});
 	}
 
@@ -30,16 +29,16 @@ public class ServicePriceRsUnmarshallingIT {
 	public String resource;
 
 	@Parameter(value=1)
-	public BigDecimal expectedAmount;
+	public String responseID;
 
 	@Test
 	public void unmarshal() {
 		InputStream is = this.getClass().getResourceAsStream(resource);
 		try {
-			JAXBContext context = JAXBContext.newInstance(ServicePriceRS.class);
+			JAXBContext context = JAXBContext.newInstance(ServicePriceRQ.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			ServicePriceRS servicePrice =  (ServicePriceRS) unmarshaller.unmarshal(is);
-			assertEquals(expectedAmount, servicePrice.getDataLists().getServiceList().get(0).getPrice().get(0).getTotal().value);
+			ServicePriceRQ servicePrice =  (ServicePriceRQ) unmarshaller.unmarshal(is);
+			assertEquals(responseID, servicePrice.getShoppingResponseIDs().getResponseID().getValue());
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			fail(e.toString());

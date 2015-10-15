@@ -1,4 +1,4 @@
-package org.iata.iata.edist;
+package org.iata.ndc.schema;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
@@ -16,12 +16,13 @@ import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
 @RunWith(Parameterized.class)
-public class SeatAvailabilityRsUnmarshallingIT {
+public class ServiceListRsUnmarshallingIT {
 
-	@Parameters(name = "{index}: {0} {1}")
+	@Parameters(name = "{index}: {0}")
 	public static Collection<String[]> sampleFiles() {
 		return Arrays.asList(new String[][] {
-			{"/SeatAvailabilityRS- Oneway.xml", "BCN"}
+			{"/ServiceListRS.xml", "Baggage"},
+			{"/ServiceListRS-Updated(14-Aug-2015).xml", "Baggage"}
 		});
 	}
 
@@ -29,16 +30,16 @@ public class SeatAvailabilityRsUnmarshallingIT {
 	public String resource;
 
 	@Parameter(value=1)
-	public String departure;
+	public String service;
 
 	@Test
 	public void unmarshal() {
 		InputStream is = this.getClass().getResourceAsStream(resource);
 		try {
-			JAXBContext context = JAXBContext.newInstance(SeatAvailabilityRS.class);
+			JAXBContext context = JAXBContext.newInstance(ServiceListRS.class);
 			Unmarshaller unmarshaller = context.createUnmarshaller();
-			SeatAvailabilityRS seatAvailabilityRS =  (SeatAvailabilityRS) unmarshaller.unmarshal(is);
-			assertEquals(departure, seatAvailabilityRS.getDataLists().getFlightSegmentList().get(0).getDeparture().getAirportCode().getValue());
+			ServiceListRS serviceListRS =  (ServiceListRS) unmarshaller.unmarshal(is);
+			assertEquals(service, serviceListRS.getDataLists().getServiceList().get(0).getName().value);
 		} catch (JAXBException e) {
 			e.printStackTrace();
 			fail(e.toString());
