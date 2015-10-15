@@ -1,4 +1,3 @@
-org.iata.iata.edist.FareList=exclude
 org.iata.iata.edist.OfferValidPeriodType=exclude
 org.iata.iata.edist.SeatComponentType.Locations.Location.Space.ColumnRange=exclude
 org.iata.iata.edist.ServiceBundleType.Selection=exclude
