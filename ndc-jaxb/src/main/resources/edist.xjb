@@ -2,6 +2,13 @@
 <jaxb:bindings version="2.0" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
 		xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
+	<!-- Move all classes to org.iata.ndc.schema package-->
+	<jaxb:bindings schemaLocation="AirShoppingRQ.xsd" node="/xs:schema">
+		<jaxb:schemaBindings>
+			<jaxb:package name="org.iata.ndc.schema"/>
+		</jaxb:schemaBindings>
+	</jaxb:bindings>
+
 	<jaxb:bindings schemaLocation="edist_structures.xsd" node="/xs:schema">
 		<jaxb:bindings node="//xs:complexType[@name='KeyWithMetaObjectBaseType']">
 			<jaxb:bindings node=".//xs:attribute[@name='Time']">

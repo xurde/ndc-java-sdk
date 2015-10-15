@@ -1,4 +1,4 @@
-org.iata.iata.edist.OfferValidPeriodType=exclude
-org.iata.iata.edist.SeatComponentType.Locations.Location.Space.ColumnRange=exclude
-org.iata.iata.edist.ServiceBundleType.Selection=exclude
-org.iata.iata.edist.ListOfServiceBundleType.ServiceBundle.Selection=exclude
+org.iata.ndc.schema.OfferValidPeriodType=exclude
+org.iata.ndc.schema.SeatComponentType.Locations.Location.Space.ColumnRange=exclude
+org.iata.ndc.schema.ServiceBundleType.Selection=exclude
+org.iata.ndc.schema.ListOfServiceBundleType.ServiceBundle.Selection=exclude
