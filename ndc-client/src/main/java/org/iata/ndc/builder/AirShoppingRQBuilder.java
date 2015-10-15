@@ -140,12 +140,6 @@ public class AirShoppingRQBuilder {
 		return request;
 	}
 
-	private void addPreference(Object preference) {
-		org.iata.iata.edist.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
-		preferenceElement.getAirlinePreferencesOrAlliancePreferencesOrFarePreferences().add(preference);
-		request.getPreferences().add(preferenceElement);
-	}
-
 	private void addCabinPreferences() {
 		if (cabins.size() == 0) {
 			return;
@@ -156,7 +150,9 @@ public class AirShoppingRQBuilder {
 			cabin.setCode(code);
 			cabinPreferencesType.getCabinType().add(cabin);
 		}
-		addPreference(cabinPreferencesType);
+		org.iata.iata.edist.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
+		preferenceElement.setCabinPreferences(cabinPreferencesType);
+		request.getPreferences().add(preferenceElement);
 	}
 
 	private void addFarePreferences() {
@@ -169,7 +165,9 @@ public class AirShoppingRQBuilder {
 			type.setCode(code);
 			farePreferences.getTypes().add(type);
 		}
-		addPreference(farePreferences);
+		org.iata.iata.edist.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
+		preferenceElement.setFarePreferences(farePreferences);
+		request.getPreferences().add(preferenceElement);
 	}
 
 	private void addAirlinePreferences() {
@@ -184,7 +182,9 @@ public class AirShoppingRQBuilder {
 			airline.setAirlineID(airlineID);
 			airlinePreferences.getAirline().add(airline);
 		}
-		addPreference(airlinePreferences);
+		org.iata.iata.edist.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
+		preferenceElement.setAirlinePreferences(airlinePreferences);
+		request.getPreferences().add(preferenceElement);
 	}
 
 	private void setDefaults() {
