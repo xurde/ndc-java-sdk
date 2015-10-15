@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by Rastko Ilic (JR Technologies, Inc.) -->
-<!-- Notice: This is NDC Draft Specification provided for pre-review by the members of the relevant governance groups, it is not provided for implementation in a production environment or considered to be the final  schema to support NDC business  requirements. The draft schema may, at any time up to final specification submission, undergo changes including, but not limited to, specific elements, element names/labels, annotations or message name as a result of the ongoing quality control process, and comments, which may be received following the pre-review. Implementation of this version is done so at the risk of the implementer or implementing company.
--->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2014.2" id="NDC2014.2">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.000" id="IATA2015.2">
 	<xsd:include schemaLocation="edist_commontypes.xsd"/>
 	<xsd:include schemaLocation="edist_structures.xsd"/>
 	<!--
@@ -112,7 +109,7 @@ Notes:
 2. These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. If supported, the technical implementation of the capability is not dictated by this specification. </xsd:documentation>
 								</xsd:annotation>
 								<xsd:complexType>
-									<xsd:choice maxOccurs="unbounded">
+									<xsd:choice>
 										<xsd:element ref="AirlinePreferences"/>
 										<xsd:element ref="AlliancePreferences"/>
 										<xsd:element ref="FarePreferences"/>
@@ -144,150 +141,67 @@ Notes:
 					</xsd:annotation>
 				</xsd:element>
 			</xsd:sequence>
-			<xsd:attributeGroup ref="RequestAttributes"/>
+			<xsd:attributeGroup ref="IATA_PayloadStdAttributes"/>
 		</xsd:complexType>
 	</xsd:element>
-	<xsd:complexType name="AirShopRequestType">
+	<xsd:complexType name="AirShopReqMetadataType">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Air Shopping Request Business Object.</xsd:documentation>
+			<xsd:documentation source="description" xml:lang="en">Air Shopping Request Metadata definition.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="Parameters" type="AirShopReqParamsType" minOccurs="0">
+			<xsd:element name="Shopping" minOccurs="0">
 				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Parameters that influence overall message results.
-
-Supported Parameter Groups: Inventory Guarantee (offer-associated); Service Filter (offer-associated); Pricing.
-
-Note: These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. The technical implementation of this capability is not dictated by this specification. </xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-			<xsd:element name="Traveler" nillable="false">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Anonymous and/ or known Traveler (Traveler) information.</xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:choice>
-						<xsd:annotation>
-							<xsd:documentation source="description" xml:lang="en">Choice between specifying:
--PTC (passenger type code/ quantity)
--Anonymous Traveler Information
--Known Traveler Information</xsd:documentation>
-						</xsd:annotation>
-						<xsd:element name="TravelerPTC">
-							<xsd:annotation>
-								<xsd:documentation source="description" xml:lang="en">Passenger type code applicable to all offers. Example: ADT
-
-Encoding Scheme:  IATA (three character) Passenger Type Code</xsd:documentation>
-							</xsd:annotation>
-							<xsd:complexType>
-								<xsd:simpleContent>
-									<xsd:extension base="PaxSimpleType"/>
-								</xsd:simpleContent>
-							</xsd:complexType>
-						</xsd:element>
-						<xsd:sequence>
-							<xsd:element ref="TravelerRoleGroup" minOccurs="0" maxOccurs="unbounded"/>
-						</xsd:sequence>
-					</xsd:choice>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="CoreQuery" nillable="false">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Core Air Shopping information by supported Air Shopping Query type.
-
-Shopping Query Input may be specified as:
-1) Prior Shopping Session Basket
-2) Attribute Shopping Query
-3) Affinity Shopping Query</xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:choice>
-						<xsd:element ref="Affinity"/>
-						<xsd:element ref="Attribute"/>
-						<xsd:element ref="FlightSpecific"/>
-						<xsd:element ref="ShoppingResponseIDs"/>
-					</xsd:choice>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="Qualifiers" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Traveler requested qualifiers to influence search results (e.g. offers and/ or offer pricing), including Payment Card, Programs, Promotions, Social Media, Special Fares and Special Needs.
-
-Notes: 
-1. These qualifiers may be specified for (e.g. apply to) both Attribute and Affinity queries.
-
-2. These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. If supported, the technical implementation of the capability is not dictated by this specification. </xsd:documentation>
+					<xsd:documentation>Shopping Query-Related Metadata.</xsd:documentation>
 				</xsd:annotation>
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element name="Qualifier" maxOccurs="unbounded">
+						<xsd:element ref="ShopMetadataGroup"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Traveler" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation>Traveler Metadata List(s).</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="TravelerMetadata"/>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Other" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation source="description" xml:lang="en">Other Metadata Lists(s).</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="OtherMetadata" maxOccurs="unbounded">
 							<xsd:annotation>
-								<xsd:documentation source="description" xml:lang="en">Qualifier choices.</xsd:documentation>
+								<xsd:documentation source="description" xml:lang="en">Other Metadata List.</xsd:documentation>
 							</xsd:annotation>
 							<xsd:complexType>
 								<xsd:choice>
-									<xsd:element ref="BaggagePricingQualifier"/>
-									<xsd:element ref="ExistingOrderQualifier"/>
-									<xsd:element ref="PaymentCardQualifiers"/>
-									<xsd:element ref="ProgramQualifiers"/>
-									<xsd:element ref="PromotionQualifiers"/>
-									<xsd:element ref="SeatQualifier"/>
-									<xsd:element ref="ServiceQualifier"/>
-									<xsd:element ref="SocialMediaQualifiers"/>
-									<xsd:element ref="SpecialFareQualifiers"/>
-									<xsd:element ref="SpecialNeedQualifiers"/>
-									<xsd:element ref="TripPurposeQualifier"/>
+									<xsd:element ref="AddressMetadatas"/>
+									<xsd:element ref="AircraftMetadatas"/>
+									<xsd:element ref="AirportMetadatas"/>
+									<xsd:element ref="CityMetadatas"/>
+									<xsd:element ref="CodesetMetadatas"/>
+									<xsd:element ref="ContactMetadatas"/>
+									<xsd:element ref="CurrencyMetadatas"/>
+									<xsd:element ref="DescriptionMetadatas"/>
+									<xsd:element ref="EquivalentID_Metadatas"/>
+									<xsd:element ref="LanguageMetadatas"/>
+									<xsd:element ref="PaymentCardMetadatas"/>
+									<xsd:element ref="PaymentFormMetadatas"/>
+									<xsd:element ref="PriceMetadatas"/>
+									<xsd:element ref="RuleMetadatas"/>
+									<xsd:element ref="StateProvMetadatas"/>
+									<xsd:element ref="ZoneMetadatas"/>
 								</xsd:choice>
 							</xsd:complexType>
 						</xsd:element>
 					</xsd:sequence>
 				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="Preferences" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Shopping Preference(s), including Airline Supplier, Alliance Program, Fare, Flight and Transfer/ Connection Points.
-
-Notes: 
-1. These preferences may be specified for (e.g. apply to) both Attribute and Affinity queries.
-
-2. These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. If supported, the technical implementation of the capability is not dictated by this specification. </xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="Preference" maxOccurs="unbounded">
-							<xsd:annotation>
-								<xsd:documentation source="description" xml:lang="en">Preference choices.</xsd:documentation>
-							</xsd:annotation>
-							<xsd:complexType>
-								<xsd:choice>
-									<xsd:element ref="AirlinePreferences"/>
-									<xsd:element ref="AlliancePreferences"/>
-									<xsd:element ref="FarePreferences"/>
-									<xsd:element ref="FlightPreferences"/>
-									<xsd:element ref="PricingMethodPreference"/>
-									<xsd:element ref="SegMaxTimePreferences"/>
-									<xsd:element ref="ServicePricingOnlyPreference"/>
-									<xsd:element ref="TransferPreferences"/>
-								</xsd:choice>
-							</xsd:complexType>
-						</xsd:element>
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="Metadata" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Metadata List(s).</xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:complexContent>
-						<xsd:extension base="AirShopReqMetadataType"/>
-					</xsd:complexContent>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element ref="Policies" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Message Policy information.</xsd:documentation>
-				</xsd:annotation>
 			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
@@ -307,7 +221,7 @@ Notes:
 						</xsd:annotation>
 						<xsd:complexType>
 							<xsd:sequence>
-								<xsd:element name="GuaranteeInd" type="xsd:boolean" minOccurs="0">
+								<xsd:element name="GuaranteeInd" type="xsd:boolean">
 									<xsd:annotation>
 										<xsd:documentation source="description" xml:lang="en">When TRUE, inventory guarantee is requested for applicable Optional Services.
 
@@ -446,81 +360,10 @@ http://www.iata.org/publications/Pages/code-search.aspx</xsd:documentation>
 			</xsd:extension>
 		</xsd:complexContent>
 	</xsd:complexType>
-	<xsd:complexType name="AirShopReqMetadataType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Air Shopping Request Metadata definition.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:sequence>
-			<xsd:element name="Shopping" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation>Shopping Query-Related Metadata.</xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element ref="ShopMetadataGroup"/>
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="Traveler" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation>Traveler Metadata List(s).</xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element ref="TravelerMetadata"/>
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="Other" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Other Metadata Lists(s).</xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="OtherMetadata" maxOccurs="unbounded">
-							<xsd:annotation>
-								<xsd:documentation source="description" xml:lang="en">Other Metadata List.</xsd:documentation>
-							</xsd:annotation>
-							<xsd:complexType>
-								<xsd:choice>
-									<xsd:element ref="AddressMetadatas"/>
-									<xsd:element ref="AircraftMetadatas"/>
-									<xsd:element ref="AirportMetadatas"/>
-									<xsd:element ref="CityMetadatas"/>
-									<xsd:element ref="CodesetMetadatas"/>
-									<xsd:element ref="ContactMetadatas"/>
-									<xsd:element ref="CurrencyMetadatas"/>
-									<xsd:element ref="DescriptionMetadatas"/>
-									<xsd:element ref="EquivalentID_Metadatas"/>
-									<xsd:element ref="LanguageMetadatas"/>
-									<xsd:element ref="PaymentCardMetadatas"/>
-									<xsd:element ref="PaymentFormMetadatas"/>
-									<xsd:element ref="PriceMetadatas"/>
-									<xsd:element ref="RuleMetadatas"/>
-									<xsd:element ref="StateProvMetadatas"/>
-									<xsd:element ref="ZoneMetadatas"/>
-								</xsd:choice>
-							</xsd:complexType>
-						</xsd:element>
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
 	<!--
 ===================================================
 ===  S H O P P I N G  Q U E R Y  T Y P E
 ===================================================-->
-	<xsd:element name="Attribute" type="AirShopReqAttributeQueryType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">ATTRIBUTE Query ORIGIN/ DESTINATION qualifiers and preferences.
-
-Note:
-1. An Attribute Query is a search specifying one or more attributes to get more focused results   Note that this node only contains Origin/ Destination Airport/ City code information which are mandatory.
-
-2. Other Attribute Query parameters that may be specified (in other document nodes) include Aircraft Equipment preferences, Seat types and characteristics, Meal preferences and Special Need qualifiers.</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
 	<xsd:element name="Affinity" type="AirShopReqAffinityQueryType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">AFFINITY QUERY Qualifiers and Preferences.
@@ -537,14 +380,64 @@ Notes:
 2. These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. The technical implementation of this capability is not dictated by this specification.</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
-	<xsd:element name="FlightSpecific" type="AirShopFlightSpecificType">
+	<xsd:complexType name="AirShopFlightSpecificType">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">FLIGHT SPECIFIC QUERY Qualifiers and Preferences.
-
-Notes:
-1. A flight specific search is a search for fares for specific listed flights only.</xsd:documentation>
+			<xsd:documentation source="description" xml:lang="en">AirShopReq Business Object: FLIGHT SPECIFIC definition.</xsd:documentation>
 		</xsd:annotation>
-	</xsd:element>
+		<xsd:choice>
+			<xsd:element name="FlightSegment" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>FlighSegment information. Contains details flight segment information.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element ref="Departure"/>
+						<xsd:element ref="Arrival"/>
+						<xsd:element name="MarketingAirline" type="MarketingCarrierFlightType">
+							<xsd:annotation>
+								<xsd:documentation>Marketing Carrier information.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element name="OperatingAirline" type="OperatingCarrierFlightType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Operating Carrier information.
+
+Note: This is the carrier that holds the Air Operator’s Certificate for the aircraft used for that flight.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+					</xsd:sequence>
+					<xsd:attribute name="SegmentKey" type="xsd:int" use="required">
+						<xsd:annotation>
+							<xsd:documentation>A globally unique identifier for this Flight Segment instance. Example: segment1</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="Flight" maxOccurs="unbounded">
+				<xsd:annotation>
+					<xsd:documentation>Flight information. Flight can be made of one to multiple FlightSegment elements. For example Flight can be made of flight segment BA123 and BA34.</xsd:documentation>
+				</xsd:annotation>
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:element name="Journey" type="TotalJourneyType" minOccurs="0">
+							<xsd:annotation>
+								<xsd:documentation>Flight journey information.</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
+						<xsd:element ref="SegmentReferences"/>
+					</xsd:sequence>
+					<xsd:attributeGroup ref="ObjAssociationAttrGroup"/>
+					<xsd:attribute name="FlightKey" type="KeyIdentifier">
+						<xsd:annotation>
+							<xsd:documentation>A globally unique identifier for this Flight instance. Example: flight1</xsd:documentation>
+						</xsd:annotation>
+					</xsd:attribute>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element ref="OriginDestination" maxOccurs="unbounded"/>
+			<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
+		</xsd:choice>
+	</xsd:complexType>
 	<xsd:complexType name="AirShopReqAttributeQueryType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A data type for AirShopReq Business Object: ATTRIBUTE QUERY definition.</xsd:documentation>
@@ -640,10 +533,10 @@ Notes:
 					<xsd:documentation source="description" xml:lang="en">Trip Budget.</xsd:documentation>
 				</xsd:annotation>
 				<xsd:complexType>
-					<xsd:sequence>
+					<xsd:choice>
 						<xsd:element ref="GroupBudget"/>
 						<xsd:element ref="PerPersonBudget"/>
-					</xsd:sequence>
+					</xsd:choice>
 				</xsd:complexType>
 			</xsd:element>
 			<xsd:element name="KeywordPreferences" minOccurs="0">
@@ -652,72 +545,7 @@ Notes:
 				</xsd:annotation>
 				<xsd:complexType>
 					<xsd:sequence>
-						<xsd:element ref="KeywordPreferences" maxOccurs="unbounded"/>
-					</xsd:sequence>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
-		</xsd:sequence>
-	</xsd:complexType>
-	<xsd:complexType name="AirShopFlightSpecificType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">AirShopReq Business Object: FLIGHT SPECIFIC definition.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:sequence>
-			<xsd:element name="FlightSegment" maxOccurs="unbounded">
-				<xsd:annotation>
-					<xsd:documentation>FlighSegment information. Contains details flight segment information.</xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element ref="Departure"/>
-						<xsd:element ref="Arrival"/>
-						<xsd:element name="MarketingAirline" type="MarketingCarrierFlightType">
-							<xsd:annotation>
-								<xsd:documentation>Marketing Carrier information.</xsd:documentation>
-							</xsd:annotation>
-						</xsd:element>
-						<xsd:element name="OperatingAirline" type="OperatingCarrierFlightType" minOccurs="0">
-							<xsd:annotation>
-								<xsd:documentation>Operating Carrier information.
-
-Note: This is the carrier that holds the Air Operator’s Certificate for the aircraft used for that flight.</xsd:documentation>
-							</xsd:annotation>
-						</xsd:element>
-					</xsd:sequence>
-					<xsd:attribute name="SegmentKey" type="xsd:int" use="required">
-						<xsd:annotation>
-							<xsd:documentation>A globally unique identifier for this Flight Segment instance. Example: segment1</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element name="Flight" maxOccurs="unbounded">
-				<xsd:annotation>
-					<xsd:documentation>Flight information. Flight can be made of one to multiple FlightSegment elements. For example Flight can be made of flight segment BA123 and BA34.</xsd:documentation>
-				</xsd:annotation>
-				<xsd:complexType>
-					<xsd:sequence>
-						<xsd:element name="Journey" type="TotalJourneyType" minOccurs="0">
-							<xsd:annotation>
-								<xsd:documentation>Flight journey information.</xsd:documentation>
-							</xsd:annotation>
-						</xsd:element>
-						<xsd:element ref="SegmentReferences"/>
-					</xsd:sequence>
-					<xsd:attributeGroup ref="ObjAssociationAttrGroup"/>
-					<xsd:attribute name="FlightKey" type="KeyIdentifier">
-						<xsd:annotation>
-							<xsd:documentation>A globally unique identifier for this Flight instance. Example: flight1</xsd:documentation>
-						</xsd:annotation>
-					</xsd:attribute>
-				</xsd:complexType>
-			</xsd:element>
-			<xsd:element ref="OriginDestination" maxOccurs="unbounded"/>
-			<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
-		</xsd:sequence>
-	</xsd:complexType>
-						<xsd:element name="KeywordPreferences">
+						<xsd:element name="KeywordPreference" maxOccurs="unbounded">
 							<xsd:annotation>
 								<xsd:documentation source="description" xml:lang="en">Keyword/ Value Search Criteria.
 
@@ -731,5 +559,29 @@ Note: Keyword-Value pairs may be used to specify a variety of affinity qualifier
 								</xsd:complexContent>
 							</xsd:complexType>
 						</xsd:element>
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="Attribute" type="AirShopReqAttributeQueryType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">ATTRIBUTE Query ORIGIN/ DESTINATION qualifiers and preferences.
+
+Note:
+1. An Attribute Query is a search specifying one or more attributes to get more focused results   Note that this node only contains Origin/ Destination Airport/ City code information which are mandatory.
+
+2. Other Attribute Query parameters that may be specified (in other document nodes) include Aircraft Equipment preferences, Seat types and characteristics, Meal preferences and Special Need qualifiers.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="FlightSpecific" type="AirShopFlightSpecificType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">FLIGHT SPECIFIC QUERY Qualifiers and Preferences.
+
+Notes:
+1. A flight specific search is a search for fares for specific listed flights only.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
 	<!---->
 </xsd:schema>

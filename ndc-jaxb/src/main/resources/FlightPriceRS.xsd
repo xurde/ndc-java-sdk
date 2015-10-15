@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by Rastko Ilic (JR Technologies, Inc.) -->
-<!-- Notice: This is NDC Draft Specification provided for pre-review by the members of the relevant governance groups, it is not provided for implementation in a production environment or considered to be the final  schema to support NDC business  requirements. The draft schema may, at any time up to final specification submission, undergo changes including, but not limited to, specific elements, element names/labels, annotations or message name as a result of the ongoing quality control process, and comments, which may be received following the pre-review. Implementation of this version is done so at the risk of the implementer or implementing company.
--->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2014.2" id="NDC2014.2">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.000" id="IATA2015.2">
 	<xsd:include schemaLocation="edist_commontypes.xsd"/>
 	<xsd:include schemaLocation="edist_structures.xsd"/>
 	<!--
@@ -22,7 +19,16 @@ If no ancillary services are available, the message returns a final pricing. If 
 			<xsd:choice>
 				<xsd:sequence>
 					<xsd:element ref="Document"/>
-					<xsd:element name="Success"/>
+					<xsd:element name="Success" type="SuccessType">
+						<xsd:annotation>
+							<xsd:documentation>The presence of the empty Success element explicitly indicates that the message succeeded.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
+					<xsd:element name="Warnings" type="WarningsType" minOccurs="0">
+						<xsd:annotation>
+							<xsd:documentation>Used in conjunction with the Success element to define one or more business errors.</xsd:documentation>
+						</xsd:annotation>
+					</xsd:element>
 					<xsd:element name="Processing" type="ProcessingResultType" minOccurs="0"/>
 					<xsd:element name="Parameters" type="FltPriceResParamsType" minOccurs="0">
 						<xsd:annotation>
@@ -31,7 +37,7 @@ If no ancillary services are available, the message returns a final pricing. If 
 Note: These capabilities may not be supported by all NDC-enabled systems or may be supported by bilateral agreement only. The technical implementation of this capability is not dictated by this specification. </xsd:documentation>
 						</xsd:annotation>
 					</xsd:element>
-					<xsd:element ref="ShoppingResponseID" minOccurs="0"/>
+					<xsd:element ref="ShoppingResponseIDs" minOccurs="0"/>
 					<xsd:element name="PricedFlightOffers" minOccurs="0">
 						<xsd:annotation>
 							<xsd:documentation>PRICED FLIGHT Airline Offer(s).</xsd:documentation>
@@ -128,6 +134,7 @@ Notes:
 					<xsd:element ref="Errors"/>
 				</xsd:sequence>
 			</xsd:choice>
+			<xsd:attributeGroup ref="IATA_PayloadStdAttributes"/>
 		</xsd:complexType>
 	</xsd:element>
 	<xsd:complexType name="FltPriceResParamsType">
@@ -243,11 +250,6 @@ Examples: I, C</xsd:documentation>
 ====================================================
 ===  O F F E R  C A T E G O R I E S
 ====================================================-->
-	<xsd:element name="FlightOfferCategoryGroup" abstract="true">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Flight-related Optional Service category representation choices.</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
 	<xsd:element name="PricedFlightOffer">
 		<xsd:annotation>
 			<xsd:documentation>A PRICED FLIGHT Offer.
@@ -292,7 +294,11 @@ Note: Taxes may still apply.</xsd:documentation>
 								</xsd:attribute>
 							</xsd:complexType>
 						</xsd:element>
-						<xsd:element name="OfferID" type="ItemID_Type"/>
+						<xsd:element name="OfferID" type="ItemID_Type">
+							<xsd:annotation>
+								<xsd:documentation>Globally unique Offer instance ID. length should not be exceed 64 character and it is recommended to not use dash char in it.Example: QWASZXERDFCVTYGHBNUIJKNMF67D5F9GHR567SWER41SD458F9456FMDIRTN34DF</xsd:documentation>
+							</xsd:annotation>
+						</xsd:element>
 						<xsd:element name="OfferPrice" type="OfferPriceLeadType" maxOccurs="unbounded">
 							<xsd:annotation>
 								<xsd:documentation source="description" xml:lang="en">Fare Offer and Lead Calendar Pricing information.</xsd:documentation>
