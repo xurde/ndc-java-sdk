@@ -9,12 +9,14 @@ import java.util.Collection;
 
 import javax.xml.bind.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameter;
 import org.junit.runners.Parameterized.Parameters;
 
+@Ignore
 @RunWith(Parameterized.class)
 public class ServicePriceRqUnmarshallingIT {
 
