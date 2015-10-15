@@ -42,8 +42,8 @@ public class NdcClientIT {
 
 	@Test
 	public void existingRequestAgainstServer() throws JAXBException {
-		InputStream is = this.getClass().getResourceAsStream("/AirShoppingRQ - OneWay with all Cabin.xml");
-		JAXBContext context = JAXBContext.newInstance(AirShoppingRQ.class);
+		InputStream is = this.getClass().getResourceAsStream("/Kronos/OneWay/AirShoppingRQ - OneWay with one pax.xml");
+		JAXBContext context = JAXBContext.newInstance("org.iata.ndc.schema");
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		AirShoppingRQ airShoppingRQ =  (AirShoppingRQ) unmarshaller.unmarshal(is);
 
