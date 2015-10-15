@@ -10,9 +10,9 @@ import java.util.Date;
 
 import javax.xml.bind.*;
 
-import org.iata.iata.edist.AirShoppingRQ;
-import org.iata.iata.edist.AirShoppingRS;
 import org.iata.ndc.builder.AirShoppingRQBuilder;
+import org.iata.ndc.schema.AirShoppingRQ;
+import org.iata.ndc.schema.AirShoppingRS;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

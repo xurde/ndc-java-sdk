@@ -8,9 +8,9 @@ import java.util.*;
 
 import javax.xml.bind.*;
 
-import org.iata.iata.edist.*;
-import org.iata.iata.edist.TravelerCoreType.PTC;
 import org.iata.ndc.builder.AirShoppingRQBuilder.Traveler;
+import org.iata.ndc.schema.*;
+import org.iata.ndc.schema.TravelerCoreType.PTC;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -34,7 +34,7 @@ public class AirShoppingRQBuilderTest {
 		testedClass.addAnonymousTraveler(Traveler.ADT);
 		AirShoppingRQ request = testedClass.build();
 
-		List<org.iata.iata.edist.TravelersTraveler> travelers = request.getTravelers();
+		List<org.iata.ndc.schema.TravelersTraveler> travelers = request.getTravelers();
 		assertEquals(1, travelers.size());
 		PTC ptc = travelers.get(0).getAnonymousTraveler().getPTC();
 		assertEquals(BigInteger.valueOf(1), ptc.getQuantity());
@@ -53,7 +53,7 @@ public class AirShoppingRQBuilderTest {
 
 		AirShoppingRQ request = testedClass.build();
 
-		List<org.iata.iata.edist.TravelersTraveler> travelers = request.getTravelers();
+		List<org.iata.ndc.schema.TravelersTraveler> travelers = request.getTravelers();
 		assertEquals(3, travelers.size());
 		for (TravelersTraveler t : travelers) {
 			PTC ptc = t.getAnonymousTraveler().getPTC();
@@ -83,7 +83,7 @@ public class AirShoppingRQBuilderTest {
 		AirShoppingRQ request = testedClass.build();
 
 		assertEquals(1, request.getCoreQuery().getOriginDestinations().size());
-		org.iata.iata.edist.AirShopReqAttributeQueryTypeOriginDestination originDestination = request.getCoreQuery().getOriginDestinations().get(0);
+		AirShopReqAttributeQueryTypeOriginDestination originDestination = request.getCoreQuery().getOriginDestinations().get(0);
 		assertEquals("Departure", originDestination.getDeparture().getAirportCode().getValue());
 		assertEquals("Arrival", originDestination.getArrival().getAirportCode().getValue());
 		assertNull("CalendarDates is present", originDestination.getCalendarDates());
@@ -97,7 +97,7 @@ public class AirShoppingRQBuilderTest {
 		AirShoppingRQ request = testedClass.build();
 
 		assertEquals(1, request.getCoreQuery().getOriginDestinations().size());
-		org.iata.iata.edist.AirShopReqAttributeQueryTypeOriginDestination originDestination = request.getCoreQuery().getOriginDestinations().get(0);
+		AirShopReqAttributeQueryTypeOriginDestination originDestination = request.getCoreQuery().getOriginDestinations().get(0);
 		assertEquals("Departure", originDestination.getDeparture().getAirportCode().getValue());
 		assertEquals("Arrival", originDestination.getArrival().getAirportCode().getValue());
 		assertNotNull("CalendarDates is not present", originDestination.getCalendarDates());

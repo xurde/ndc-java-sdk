@@ -10,7 +10,7 @@ import org.apache.http.Consts;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.fluent.Request;
 import org.apache.http.entity.ContentType;
-import org.iata.iata.edist.*;
+import org.iata.ndc.schema.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

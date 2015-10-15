@@ -6,13 +6,13 @@ import java.util.*;
 import javax.xml.datatype.*;
 
 import org.apache.commons.codec.digest.DigestUtils;
-import org.iata.iata.edist.*;
-import org.iata.iata.edist.AirShopReqAttributeQueryTypeOriginDestination.CalendarDates;
-import org.iata.iata.edist.FarePreferencesType.Type;
-import org.iata.iata.edist.FlightDepartureType.AirportCode;
-import org.iata.iata.edist.MsgPartiesType.Sender;
-import org.iata.iata.edist.TravelerCoreType.PTC;
 import org.iata.ndc.ClientException;
+import org.iata.ndc.schema.*;
+import org.iata.ndc.schema.AirShopReqAttributeQueryTypeOriginDestination.CalendarDates;
+import org.iata.ndc.schema.FarePreferencesType.Type;
+import org.iata.ndc.schema.FlightDepartureType.AirportCode;
+import org.iata.ndc.schema.MsgPartiesType.Sender;
+import org.iata.ndc.schema.TravelerCoreType.PTC;
 
 
 public class AirShoppingRQBuilder {
@@ -150,7 +150,7 @@ public class AirShoppingRQBuilder {
 			cabin.setCode(code);
 			cabinPreferencesType.getCabinType().add(cabin);
 		}
-		org.iata.iata.edist.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
+		org.iata.ndc.schema.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
 		preferenceElement.setCabinPreferences(cabinPreferencesType);
 		request.getPreferences().add(preferenceElement);
 	}
@@ -165,7 +165,7 @@ public class AirShoppingRQBuilder {
 			type.setCode(code);
 			farePreferences.getTypes().add(type);
 		}
-		org.iata.iata.edist.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
+		org.iata.ndc.schema.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
 		preferenceElement.setFarePreferences(farePreferences);
 		request.getPreferences().add(preferenceElement);
 	}
@@ -182,7 +182,7 @@ public class AirShoppingRQBuilder {
 			airline.setAirlineID(airlineID);
 			airlinePreferences.getAirline().add(airline);
 		}
-		org.iata.iata.edist.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
+		org.iata.ndc.schema.AirShoppingRQ.Preference preferenceElement = factory.createAirShoppingRQPreference();
 		preferenceElement.setAirlinePreferences(airlinePreferences);
 		request.getPreferences().add(preferenceElement);
 	}
@@ -203,7 +203,7 @@ public class AirShoppingRQBuilder {
 
 	private void addTravelers() {
 		for (Traveler t: anonymousTravelers.keySet()) {
-			org.iata.iata.edist.TravelersTraveler traveler = factory.createTravelersTraveler();
+			org.iata.ndc.schema.TravelersTraveler traveler = factory.createTravelersTraveler();
 			traveler.setAnonymousTraveler(factory.createAnonymousTravelerType());
 			PTC ptc = factory.createTravelerCoreTypePTC();
 			ptc.setValue(t.name());
