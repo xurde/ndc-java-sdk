@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- edited with XMLSpy v2014 rel. 2 sp1 (x64) (http://www.altova.com) by Atul Bhabal (JR Technologies, Inc.) -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2014.2" id="NDC2014.2">
+<!-- edited with XMLSpy v2013 rel. 2 (x64) (http://www.altova.com) by PIA MAESTRONI (IATA) -->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.000" id="IATA2015.2">
 	<xsd:annotation>
-		<xsd:documentation xml:lang="en">NDC XML Specification Base Structures. Includes base types for NDC XML data objects, utility xml objects and core simple type definitions.</xsd:documentation>
-	</xsd:annotation>
-	<xsd:annotation>
-		<xsd:documentation xml:lang="en">Notice: This is NDC Draft Specification provided for pre-review by the members of the relevant governance groups, it is not provided for implementation in a production environment or considered to be the final  schema to support NDC business requirements. The draft schema may, at any time up to final specification submission, undergo changes including, but not limited to, specific elements, element names/labels, annotations or message name as a result of the ongoing quality control process, and comments, which may be received following the pre-review. Implementation of this version is done so at the risk of the implementer or implementing company.</xsd:documentation>
+		<xsd:documentation xml:lang="en">EDIST XML Specification Base Structures. Includes base types for EDIST XML data objects, utility xml objects and core simple type definitions.</xsd:documentation>
 	</xsd:annotation>
 	<!--xsd:include schemaLocation="edist_commontypes.xsd"/-->
 	<!--
@@ -79,37 +76,6 @@ Example: 2B75C565-5BB0- 4DCE-8DE6-67CB7B4F25A7</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
-	<xsd:complexType name="GroupBaseType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A base type definition for Qualified Group Entity Object Collection.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:sequence>
-			<xsd:element name="AugPointAssocs" type="AugPointAssocType" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation>Object Augmentation Point(s).</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-		<xsd:attribute name="GroupToken" type="DescriptionSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Unique Group Collection Token.
-
-Example: {39012DC9-7318-4056-A128-71B9A553E340}
-
-Note: This token pertains to all specified Groups, e.g. the group collection.</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="Owner" type="OwnerSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation>Source Entity Code or ID. Examples: BA, WIDGETCO</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="Seq" type="xsd:integer" use="optional">
-			<xsd:annotation>
-				<xsd:documentation>Sequence ID. Example: 1</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:complexType>
 	<xsd:complexType name="ListBaseType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A base type definition for Data List Object.</xsd:documentation>
@@ -138,15 +104,6 @@ Note: This token pertains to all specified List instances, e.g. the list collect
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A base type definition for Metadata Object.</xsd:documentation>
 		</xsd:annotation>
-		<xsd:attribute name="MetadataToken" type="DescriptionSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Unique Metadata Collection Token.
-
-Example: jZhJu7SORZeO MNpifElIkA
-
-Note: This token pertains to all specified metadata information, e.g. the metadata collection.</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
 	</xsd:complexType>
 	<xsd:simpleType name="OwnerSimpleType">
 		<xsd:annotation>
@@ -166,17 +123,6 @@ Note: This token pertains to all specified metadata information, e.g. the metada
 ======================================================
 === A S S O C I A T E D  O B J E C T S
 ======================================================-->
-	<xsd:attributeGroup name="ObjAssociationAttrGroup">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Policy and other object association.
-</xsd:documentation>
-		</xsd:annotation>
-		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:attributeGroup>
 	<xsd:complexType name="AssociatedObjectBaseType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A base type for an Object with Instance Associations.</xsd:documentation>
@@ -213,6 +159,17 @@ Note: This token pertains to all specified metadata information, e.g. the metada
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
+	<xsd:attributeGroup name="ObjAssociationAttrGroup">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Policy and other object association.
+</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
 	<xsd:simpleType name="TokenID_SimpleType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A data type definition for Reference Association Token type and size constraint.</xsd:documentation>
@@ -698,66 +655,6 @@ Notes: Within NDC, metadata is defined as data about data. This may include info
 ======================================================
 === K E Y  O B J E C T   W I T H   M E T A D A T A
 ======================================================-->
-	<xsd:attributeGroup name="ObjectKeyAttrGroup">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Policy, unique instance id and other object associations.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="ObjectKey" type="xsd:ID" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Object globally unique Instance ID. Example: obj1</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:attributeGroup>
-	<xsd:attributeGroup name="ObjectKeyMetaAttrGroup">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Policy, unique instance id, object metadata and other object associations.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="ObjectKey" type="xsd:ID" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Object globally unique Instance ID. Example: obj1</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:attributeGroup>
-	<xsd:attributeGroup name="OfferKeyMetaAttrGroup">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Policy, unique instance id, object metadata and other object associations.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="OfferMetaReferences" type="InstanceClassRefSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Offer Metadata Association(s). Example: meta1 meta3</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:attributeGroup>
-	<xsd:attributeGroup name="ObjectPolicyMetaAttrGroup">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Policy, object metadata and other object associations.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="ObjectMetaReferences" type="InstanceClassRefSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation source="description" xml:lang="en">Object Metadata Association(s). Example: meta1 meta3</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:attributeGroup>
 	<xsd:complexType name="KeyObjectBaseType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A base type for a Keyed Object.</xsd:documentation>
@@ -773,13 +670,6 @@ Notes: Within NDC, metadata is defined as data about data. This may include info
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A base type for a Keyed Object with Metadata Reference..</xsd:documentation>
 		</xsd:annotation>
-		<xsd:sequence>
-			<xsd:element name="Metadata" type="MetaBaseType" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation>Metadat information.</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
 		<xsd:attributeGroup ref="ObjectKeyMetaAttrGroup"/>
 		<xsd:attribute name="DisplayAllInd" type="xsd:boolean" use="optional">
 			<xsd:annotation>
@@ -1011,6 +901,15 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 [Encoding Scheme] ISO 8601 Military/ 24 Hour (HH:MM)</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
+		<xsd:attribute name="MetadataToken" type="DescriptionSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Unique Metadata Collection Token.
+
+Example: jZhJu7SORZeO MNpifElIkA
+
+Note: This token pertains to all specified metadata information, e.g. the metadata collection.</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
 	</xsd:complexType>
 	<xsd:complexType name="KeyWithMetaOfferBaseType">
 		<xsd:annotation>
@@ -1018,40 +917,71 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 		</xsd:annotation>
 		<xsd:attributeGroup ref="OfferKeyMetaAttrGroup"/>
 	</xsd:complexType>
+	<xsd:attributeGroup name="ObjectKeyAttrGroup">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Policy, unique instance id and other object associations.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="ObjectKey" type="xsd:ID" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Object globally unique Instance ID. Example: obj1</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="ObjectKeyMetaAttrGroup">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Policy, unique instance id, object metadata and other object associations.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="ObjectKey" type="xsd:ID" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Object globally unique Instance ID. Example: obj1</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="OfferKeyMetaAttrGroup">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Policy, unique instance id, object metadata and other object associations.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="OfferMetaReferences" type="InstanceClassRefSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Offer Metadata Association(s). Example: meta1 meta3</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
+	<xsd:attributeGroup name="ObjectPolicyMetaAttrGroup">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Policy, object metadata and other object associations.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="refs" type="MultiAssocSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Object association(s) between this object and any other object or metadata instance(s).</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="ObjectMetaReferences" type="InstanceClassRefSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation source="description" xml:lang="en">Object Metadata Association(s). Example: meta1 meta3</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:attributeGroup>
 	<!--
 ===================================================
           DATE AND PERIOD REPRESENTATION
 ===================================================-->
 	<!--            <<< DATE >>>-->
-	<xsd:complexType name="CoreDateGrpType">
-		<xsd:annotation>
-			<xsd:documentation>A data type definition for Commonly Used Date Representation Formats: Short Date, Date and Time, Timestamp</xsd:documentation>
-		</xsd:annotation>
-		<xsd:attribute name="DateTime" type="xsd:dateTime" use="optional">
-			<xsd:annotation>
-				<xsd:documentation>Date and time. Example: 2017-01-03T13:20:00</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="ShortDate" type="xsd:date" use="optional">
-			<xsd:annotation>
-				<xsd:documentation>Short date. Example: 2017-01-13
-
-Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="Timestamp" type="xsd:dateTime" use="optional">
-			<xsd:annotation>
-				<xsd:documentation>Timestamp. Example: 2017-01-13T13:59:38Z</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-		<xsd:attribute name="Time" type="TimeSimpleType" use="optional">
-			<xsd:annotation>
-				<xsd:documentation>Time. Example: 14:00
-
-[Encoding Scheme] ISO 8601 Military/ 24 Hour (HH:MM)</xsd:documentation>
-			</xsd:annotation>
-		</xsd:attribute>
-	</xsd:complexType>
 	<xsd:attributeGroup name="AttrCoreDateGrpType">
 		<xsd:annotation>
 			<xsd:documentation>A data type definition for Commonly Used Date Representation Formats: Short Date, Date and Time, Timestamp</xsd:documentation>
@@ -1108,6 +1038,35 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 		<xsd:attribute name="MonthNumber" type="MonthNumberSimpleType" use="optional">
 			<xsd:annotation>
 				<xsd:documentation>A month number. Example: 01 (January)</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+	</xsd:complexType>
+	<xsd:complexType name="CoreDateGrpType">
+		<xsd:annotation>
+			<xsd:documentation>A data type definition for Commonly Used Date Representation Formats: Short Date, Date and Time, Timestamp</xsd:documentation>
+		</xsd:annotation>
+		<xsd:attribute name="DateTime" type="xsd:dateTime" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Date and time. Example: 2017-01-03T13:20:00</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="ShortDate" type="xsd:date" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Short date. Example: 2017-01-13
+
+Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Timestamp" type="xsd:dateTime" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Timestamp. Example: 2017-01-13T13:59:38Z</xsd:documentation>
+			</xsd:annotation>
+		</xsd:attribute>
+		<xsd:attribute name="Time" type="TimeSimpleType" use="optional">
+			<xsd:annotation>
+				<xsd:documentation>Time. Example: 14:00
+
+[Encoding Scheme] ISO 8601 Military/ 24 Hour (HH:MM)</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
@@ -1237,6 +1196,79 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
     U N I Q U E  I D  / U R I
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+	<xsd:simpleType name="DomainListType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type definition for Named NDC Domain list constraint.
+
+Examples: Shopping, OrderManagement, PaymentTicketing, AirlineProfile, Utility
+
+Note: Supports pre-defined enumerated list and/ or bilaterally-agreed upon values.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="DomainSimpleType ListApplicationSimpleType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="EncSchemeSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type definition for Encoding Scheme Source Provider Type list constraint.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:whiteSpace value="collapse"/>
+			<xsd:enumeration value="Airline"/>
+			<xsd:enumeration value="Filed"/>
+			<xsd:enumeration value="ThirdParty"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="EncSchemeListType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type definition for Encoding Scheme Source Provider Type.
+
+Examples: Airline, Filed, ThirdParty
+
+Note: Supports pre-defined enumerated list and/ or bilaterally-agreed upon values.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="ListApplicationSimpleType EncSchemeSimpleType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="InstanceClassRefSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type definition for Globally Unique XML Instance or Other Class Reference Association size constraint.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:IDREFS"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="KeyIdentifier">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for an xsd:ID unique instance identifier.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:ID"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="ListApplicationSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type definition for List Application size constraint.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="35"/>
+			<xsd:whiteSpace value="collapse"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="MultiAssocSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for an InstanceClassRefSimpleType Association.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="InstanceClassRefSimpleType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="SingleAssocSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for an xsd:IDREF Association.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:IDREF"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="UniqueID_SimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type definition for Service, Offer, Order and Order Item ID size constraint.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:maxLength value="45"/>
+			<xsd:minLength value="1"/>
+		</xsd:restriction>
+	</xsd:simpleType>
 	<xsd:complexType name="UniqueIDContextType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A data type for Unique ID with Context.</xsd:documentation>
@@ -1270,79 +1302,6 @@ Example: www.thislink.com</xsd:documentation>
 			</xsd:extension>
 		</xsd:simpleContent>
 	</xsd:complexType>
-	<xsd:simpleType name="KeyIdentifier">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for an xsd:ID unique instance identifier.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:ID"/>
-	</xsd:simpleType>
-	<xsd:simpleType name="SingleAssocSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for an xsd:IDREF Association.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:IDREF"/>
-	</xsd:simpleType>
-	<xsd:simpleType name="MultiAssocSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for an InstanceClassRefSimpleType Association.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="InstanceClassRefSimpleType"/>
-	</xsd:simpleType>
-	<xsd:simpleType name="InstanceClassRefSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type definition for Globally Unique XML Instance or Other Class Reference Association size constraint.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:IDREFS"/>
-	</xsd:simpleType>
-	<xsd:simpleType name="DomainListType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type definition for Named NDC Domain list constraint.
-
-Examples: Shopping, OrderManagement, PaymentTicketing, AirlineProfile, Utility
-
-Note: Supports pre-defined enumerated list and/ or bilaterally-agreed upon values.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:union memberTypes="DomainSimpleType ListApplicationSimpleType"/>
-	</xsd:simpleType>
-	<xsd:simpleType name="EncSchemeListType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type definition for Encoding Scheme Source Provider Type.
-
-Examples: Airline, Filed, ThirdParty
-
-Note: Supports pre-defined enumerated list and/ or bilaterally-agreed upon values.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:union memberTypes="ListApplicationSimpleType EncSchemeSimpleType"/>
-	</xsd:simpleType>
-	<xsd:simpleType name="UniqueID_SimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type definition for Service, Offer, Order and Order Item ID size constraint.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:maxLength value="45"/>
-			<xsd:minLength value="1"/>
-		</xsd:restriction>
-	</xsd:simpleType>
-	<xsd:simpleType name="ListApplicationSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type definition for List Application size constraint.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:maxLength value="35"/>
-			<xsd:whiteSpace value="collapse"/>
-		</xsd:restriction>
-	</xsd:simpleType>
-	<xsd:simpleType name="EncSchemeSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type definition for Encoding Scheme Source Provider Type list constraint.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:whiteSpace value="collapse"/>
-			<xsd:enumeration value="Airline"/>
-			<xsd:enumeration value="Filed"/>
-			<xsd:enumeration value="ThirdParty"/>
-		</xsd:restriction>
-	</xsd:simpleType>
 	<!--
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     P E R I O D  R E P R E S E N T A T I O N  D E F I N I T I O N S
@@ -1402,6 +1361,11 @@ Note:
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
+	<xsd:element name="DateTime" type="DateTimeRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A date and time. Example: 2017-01-03T13:20:00</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
 	<xsd:complexType name="DatePeriodType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A data type definition for Effective/ Expiration Short Date Period Representation.</xsd:documentation>
@@ -1421,12 +1385,19 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 			</xsd:annotation>
 		</xsd:attribute>
 	</xsd:complexType>
-	<xsd:element name="CommonDateGroup" abstract="true">
+	<xsd:element name="Day" type="DayRepType">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Common Date representation formats. Includes:
--Short Date. Example: 2017-01-13
--Date and Time. Example: 2017-01-03T13:20:00
--Timestamp. Example: 2017-01-13T13:59:38Z</xsd:documentation>
+			<xsd:documentation source="description" xml:lang="en">A day of the week number. Example: 01 (Monday)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="MonthYear" type="MonthYearRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A short month and year. Example: 01-17 (January 2017)</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="Month" type="MonthRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A month number. Example: 01 (January)</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 	<xsd:element name="ShortDate" type="DateRepType">
@@ -1434,11 +1405,6 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 			<xsd:documentation source="description" xml:lang="en">A short date. Example: 2017-01-13
 
 Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
-	<xsd:element name="DateTime" type="DateTimeRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A date and time. Example: 2017-01-03T13:20:00</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 	<xsd:complexType name="TimestampType">
@@ -1454,47 +1420,17 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 			<xsd:documentation source="description" xml:lang="en">A Timestamp. Example: 2015-01-13T13:59:38Z</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
-	<xsd:element name="OtherDateGroup" abstract="true">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Other Date/ Time Period representation choices.  Includes:
--Day of week number
--Month number
--Short Month and Short Year. Example: 01-17
--Full Year.  Example: 2017
--Full Year and Short Month.  Example: 2017-01</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
-	<xsd:element name="MonthYear" type="MonthYearRepType" substitutionGroup="OtherDateGroup">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A short month and year. Example: 01-17 (January 2017)</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
-	<xsd:element name="Day" type="DayRepType" substitutionGroup="OtherDateGroup">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A day of the week number. Example: 01 (Monday)</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
-	<xsd:element name="Month" type="MonthRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A month number. Example: 01 (January)</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
-	<xsd:element name="Year" type="YearRepType" substitutionGroup="OtherDateGroup">
+	<xsd:element name="Year" type="YearRepType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A full year. Example: 2017</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
-	<xsd:element name="YearMonth" type="YearMonthRepType" substitutionGroup="OtherDateGroup">
+	<xsd:element name="YearMonth" type="YearMonthRepType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A full year and a short month. Example: 2017-01</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 	<!--<< Period Representation >>-->
-	<xsd:element name="PeriodGroup" abstract="true">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Period.</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
 	<xsd:element name="DatePeriod" type="DatePeriodRepType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Dates.</xsd:documentation>
@@ -1505,36 +1441,25 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Date and Time.</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
-	<xsd:element name="QuarterPeriod" type="QuarterPeriodRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Calendar Quarter.</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
 	<xsd:element name="DayPeriod" type="DayPeriodRepType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Day of Week.</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
-	<xsd:element name="MonthPeriod" type="MonthPeriodRepType">
+	<xsd:complexType name="DayRepType">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Months.</xsd:documentation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Day of Week Date Period Representation.</xsd:documentation>
 		</xsd:annotation>
-	</xsd:element>
-	<xsd:element name="YearPeriod" type="YearPeriodRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Full Year.</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
-	<xsd:element name="YearMonthPeriod" type="YearMonthPeriodRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Full Year and Month.</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
-	<xsd:element name="TimePeriod" type="TimePeriodRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Times.</xsd:documentation>
-		</xsd:annotation>
-	</xsd:element>
+		<xsd:simpleContent>
+			<xsd:extension base="DayOfWeekSimpleType">
+				<xsd:attribute name="Name" type="ContextSimpleType" use="optional">
+					<xsd:annotation>
+						<xsd:documentation source="description" xml:lang="en">Day Name.  Example: Monday</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
 	<xsd:complexType name="DateRepType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A data type for Short Date Period Representation.
@@ -1553,66 +1478,6 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 		</xsd:annotation>
 		<xsd:simpleContent>
 			<xsd:extension base="xsd:dateTime"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="MonthYearRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Short Month And Year Date Period Representation.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:simpleContent>
-			<xsd:extension base="ShortYearMonthSimpleType"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="DayRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Day of Week Date Period Representation.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:simpleContent>
-			<xsd:extension base="DayOfWeekSimpleType">
-				<xsd:attribute name="Name" type="ContextSimpleType" use="optional">
-					<xsd:annotation>
-						<xsd:documentation source="description" xml:lang="en">Day Name.  Example: Monday</xsd:documentation>
-					</xsd:annotation>
-				</xsd:attribute>
-			</xsd:extension>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="MonthRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Month Number Date Period Representation.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:simpleContent>
-			<xsd:extension base="MonthNumberSimpleType">
-				<xsd:attribute name="Name" type="ContextSimpleType" use="optional">
-					<xsd:annotation>
-						<xsd:documentation source="description" xml:lang="en">Month Name.  Example: January</xsd:documentation>
-					</xsd:annotation>
-				</xsd:attribute>
-			</xsd:extension>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="TimestampRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for a Timestamp Representation. Example: 2015-01-13T13:59:38Z</xsd:documentation>
-		</xsd:annotation>
-		<xsd:simpleContent>
-			<xsd:extension base="xsd:dateTime"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="YearRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Year Date Period Representation.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:simpleContent>
-			<xsd:extension base="xsd:gYear"/>
-		</xsd:simpleContent>
-	</xsd:complexType>
-	<xsd:complexType name="YearMonthRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Year And Month Date Period Representation.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:simpleContent>
-			<xsd:extension base="xsd:gYearMonth"/>
 		</xsd:simpleContent>
 	</xsd:complexType>
 	<xsd:complexType name="DatePeriodRepType">
@@ -1653,6 +1518,72 @@ Encoding Scheme: ISO 8601 Date Format (YYYY-MM-DD)</xsd:documentation>
 			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
+	<xsd:complexType name="DayPeriodRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Effective/ Expiration Day of Week Date Period Representation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Effective" type="DayRepType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation source="description" xml:lang="en">Effective (start) day of the week number.  Example: 01</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Expiration" type="DayRepType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation source="description" xml:lang="en">Expiration (end) day of the week number.  Example: 04</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="MonthPeriod" type="MonthPeriodRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Months.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="MonthYearRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Short Month And Year Date Period Representation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="ShortYearMonthSimpleType"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="MonthRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Month Number Date Period Representation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="MonthNumberSimpleType">
+				<xsd:attribute name="Name" type="ContextSimpleType" use="optional">
+					<xsd:annotation>
+						<xsd:documentation source="description" xml:lang="en">Month Name.  Example: January</xsd:documentation>
+					</xsd:annotation>
+				</xsd:attribute>
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="MonthPeriodRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Effective/ Expiration Month Date Period Representation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="Effective" type="MonthRepType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation source="description" xml:lang="en">Effective (start) month number.  Example: 01</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+			<xsd:element name="Expiration" type="MonthRepType" minOccurs="0">
+				<xsd:annotation>
+					<xsd:documentation source="description" xml:lang="en">Expiration (end) month number.  Example: 04</xsd:documentation>
+				</xsd:annotation>
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:element name="QuarterPeriod" type="QuarterPeriodRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Calendar Quarter.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
 	<xsd:complexType name="QuarterPeriodRepType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A data type for Effective/ Expiration Calendar Quarter Period Representation.</xsd:documentation>
@@ -1688,39 +1619,65 @@ Example: 3Q (JUL-SEP)</xsd:documentation>
 			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="DayPeriodRepType">
+	<xsd:element name="TimePeriod" type="TimePeriodRepType">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Effective/ Expiration Day of Week Date Period Representation.</xsd:documentation>
+			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Times.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="TimePeriodRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Effective/ Expiration Time Period Representation.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
-			<xsd:element name="Effective" type="DayRepType" minOccurs="0">
+			<xsd:element name="Effective" type="TimeSimpleType" minOccurs="0">
 				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Effective (start) day of the week number.  Example: 01</xsd:documentation>
+					<xsd:documentation source="description" xml:lang="en">Effective (start) time.  Example: 09:00
+
+Encoding Scheme: ISO 8601 Military/ 24 Hour Format (HH:MM)</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
-			<xsd:element name="Expiration" type="DayRepType" minOccurs="0">
+			<xsd:element name="Expiration" type="TimeSimpleType" minOccurs="0">
 				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Expiration (end) day of the week number.  Example: 04</xsd:documentation>
+					<xsd:documentation source="description" xml:lang="en">Expiration time.  Example: 18:00
+
+Encoding Scheme: ISO 8601 Military/ 24 Hour Format (HH:MM)</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="MonthPeriodRepType">
+	<xsd:complexType name="TimestampRepType">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Effective/ Expiration Month Date Period Representation.</xsd:documentation>
+			<xsd:documentation source="description" xml:lang="en">A data type for a Timestamp Representation. Example: 2015-01-13T13:59:38Z</xsd:documentation>
 		</xsd:annotation>
-		<xsd:sequence>
-			<xsd:element name="Effective" type="MonthRepType" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Effective (start) month number.  Example: 01</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-			<xsd:element name="Expiration" type="MonthRepType" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Expiration (end) month number.  Example: 04</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:dateTime"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:element name="YearPeriod" type="YearPeriodRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Full Year.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:element name="YearMonthPeriod" type="YearMonthPeriodRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">Effective (start) and expiration (end) Full Year and Month.</xsd:documentation>
+		</xsd:annotation>
+	</xsd:element>
+	<xsd:complexType name="YearRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Year Date Period Representation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:gYear"/>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:complexType name="YearMonthRepType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Year And Month Date Period Representation.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:gYearMonth"/>
+		</xsd:simpleContent>
 	</xsd:complexType>
 	<xsd:complexType name="YearPeriodRepType">
 		<xsd:annotation>
@@ -1758,43 +1715,11 @@ Example: 2016</xsd:documentation>
 			</xsd:element>
 		</xsd:sequence>
 	</xsd:complexType>
-	<xsd:complexType name="TimePeriodRepType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Effective/ Expiration Time Period Representation.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:sequence>
-			<xsd:element name="Effective" type="TimeSimpleType" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Effective (start) time.  Example: 09:00
-
-Encoding Scheme: ISO 8601 Military/ 24 Hour Format (HH:MM)</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-			<xsd:element name="Expiration" type="TimeSimpleType" minOccurs="0">
-				<xsd:annotation>
-					<xsd:documentation source="description" xml:lang="en">Expiration time.  Example: 18:00
-
-Encoding Scheme: ISO 8601 Military/ 24 Hour Format (HH:MM)</xsd:documentation>
-				</xsd:annotation>
-			</xsd:element>
-		</xsd:sequence>
-	</xsd:complexType>
 	<!--
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     S I M P L E  T Y P E  D E F I N I T I O N S
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
 	<!-- << 3DS PROGRAM >> -->
-	<xsd:simpleType name="EnableAVS_SimpleType">
-		<xsd:annotation>
-			<xsd:documentation>
-        A data type for Enable 3DS Address Verification Data contextual list. Examples: Enable, Disable
-      </xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="Disable"/>
-			<xsd:enumeration value="Enable"/>
-		</xsd:restriction>
-	</xsd:simpleType>
 	<xsd:simpleType name="AVS_ActionSimpleType">
 		<xsd:annotation>
 			<xsd:documentation>
@@ -1907,6 +1832,17 @@ Encoding Scheme: ISO 8601 Military/ 24 Hour Format (HH:MM)</xsd:documentation>
       </xsd:documentation>
 		</xsd:annotation>
 		<xsd:union memberTypes="ApplicationSimpleType CustomerAuthStatusListType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="EnableAVS_SimpleType">
+		<xsd:annotation>
+			<xsd:documentation>
+        A data type for Enable 3DS Address Verification Data contextual list. Examples: Enable, Disable
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Disable"/>
+			<xsd:enumeration value="Enable"/>
+		</xsd:restriction>
 	</xsd:simpleType>
 	<xsd:simpleType name="EnrollStatusListType">
 		<xsd:annotation>
@@ -2252,7 +2188,7 @@ Max Length: 6</xsd:documentation>
 			<xsd:documentation source="Example" xml:lang="en">Examples: A, ABC, 1</xsd:documentation>
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
-			<xsd:minLength value="0"/>
+			<xsd:minLength value="1"/>
 			<xsd:maxLength value="15"/>
 		</xsd:restriction>
 	</xsd:simpleType>
@@ -2400,22 +2336,6 @@ Max Length: 35</xsd:documentation>
 			</xsd:enumeration>
 		</xsd:restriction>
 	</xsd:simpleType>
-	<xsd:simpleType name="FareWaiverRuleListType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Fare Rule Modification or Override Type contextual list.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="ExchangedReissued"/>
-			<xsd:enumeration value="FareComponent"/>
-			<xsd:enumeration value="Other"/>
-		</xsd:restriction>
-	</xsd:simpleType>
-	<xsd:simpleType name="FareWaiverRuleSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Baggage Application.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:union memberTypes="ApplicationSimpleType FareWaiverRuleListType"/>
-	</xsd:simpleType>
 	<xsd:simpleType name="CpnCancelFunctionListType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">
@@ -2433,6 +2353,22 @@ Max Length: 35</xsd:documentation>
 			<xsd:documentation source="description" xml:lang="en">A data type for Baggage Application.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:union memberTypes="ApplicationSimpleType CpnCancelFunctionListType"/>
+	</xsd:simpleType>
+	<xsd:simpleType name="FareWaiverRuleListType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Fare Rule Modification or Override Type contextual list.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="ExchangedReissued"/>
+			<xsd:enumeration value="FareComponent"/>
+			<xsd:enumeration value="Other"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="FareWaiverRuleSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for Baggage Application.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="ApplicationSimpleType FareWaiverRuleListType"/>
 	</xsd:simpleType>
 	<!--<< CURRENCY >>-->
 	<xsd:attributeGroup name="AmountCurrencyGroup">
@@ -2796,6 +2732,14 @@ Examples: Display, Requested, Spoken, Written, Other</xsd:documentation>
 		</xsd:restriction>
 	</xsd:simpleType>
 	<!--<< PAYMENT >>-->
+	<xsd:simpleType name="ApprovalCodeSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for a Payment Card Approval Code constraint.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9a-zA-Z]{1,8}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
 	<xsd:simpleType name="PayCardTypeSimpleType">
 		<xsd:annotation>
 			<xsd:documentation xml:lang="en">A data type for a Credit Card Type constraint.</xsd:documentation>
@@ -2836,28 +2780,12 @@ Examples: Display, Requested, Spoken, Written, Other</xsd:documentation>
 			<xsd:pattern value="[0-9]{1,8}"/>
 		</xsd:restriction>
 	</xsd:simpleType>
-	<xsd:simpleType name="MaskedCardNmbrSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for a Masked Payment Card Number constraint.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:pattern value="[0-9a-zA-Z]{1,19}"/>
-		</xsd:restriction>
-	</xsd:simpleType>
 	<xsd:simpleType name="PayCardDateSimpleType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A data type for a Payment Card Date constraint.</xsd:documentation>
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
 			<xsd:pattern value="(0[1-9]|1[0-2])[0-9][0-9]"/>
-		</xsd:restriction>
-	</xsd:simpleType>
-	<xsd:simpleType name="ApprovalCodeSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for a Payment Card Approval Code constraint.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:pattern value="[0-9a-zA-Z]{1,8}"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 	<xsd:simpleType name="PayFormListType">
@@ -2930,6 +2858,14 @@ Examples: Display, Requested, Spoken, Written, Other</xsd:documentation>
 		</xsd:annotation>
 		<xsd:union memberTypes="ApplicationSimpleType PaymentStatusListType"/>
 	</xsd:simpleType>
+	<xsd:simpleType name="MaskedCardNmbrSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">A data type for a Masked Payment Card Number constraint.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9a-zA-Z]{1,19}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
 	<!--<< PENALTY >>-->
 	<xsd:simpleType name="PenaltyAppListType">
 		<xsd:annotation>
@@ -2968,21 +2904,12 @@ Examples: Display, Requested, Spoken, Written, Other</xsd:documentation>
 		<xsd:union memberTypes="ApplicationSimpleType PenaltyListType"/>
 	</xsd:simpleType>
 	<!--<< PERCENTAGE >>-->
-	<xsd:simpleType name="FractionPercentageSimpleType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">A data type for Fraction Percentage size constraint.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:decimal">
-			<xsd:minInclusive value="0.01"/>
-			<xsd:maxInclusive value="100"/>
-		</xsd:restriction>
-	</xsd:simpleType>
 	<xsd:simpleType name="WholePercentageSimpleType">
 		<xsd:annotation>
 			<xsd:documentation source="description" xml:lang="en">A data type for  Whole Percentage encoding constraint.</xsd:documentation>
 		</xsd:annotation>
-		<xsd:restriction base="xsd:integer">
-			<xsd:minInclusive value="0"/>
+		<xsd:restriction base="xsd:decimal">
+			<xsd:minInclusive value="0.01"/>
 			<xsd:maxInclusive value="100"/>
 		</xsd:restriction>
 	</xsd:simpleType>
@@ -3351,29 +3278,13 @@ Notes: Use of IATA Padis Codeset - List for data element GZO (Geographical Zone)
 		<xsd:union memberTypes="ApplicationSimpleType PolicyTypeSimpleType"/>
 	</xsd:simpleType>
 	<!-- << RESHOPPING >> -->
-	<xsd:simpleType name="OrderItemActionSimpleType">
+	<xsd:simpleType name="AlphaNumericStringLength1to2">
 		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">
-        A data type for an Order Action list constraint. Examples: Cancel, Create, Divide, Delete, Reissue, Reprice, Update
-      </xsd:documentation>
+			<xsd:documentation xml:lang="en">Used for Alpha-Numeric Strings, length 1 to 2</xsd:documentation>
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
-			<xsd:enumeration value="Cancel"/>
-			<xsd:enumeration value="Create"/>
-			<xsd:enumeration value="Delete"/>
-			<xsd:enumeration value="Divide"/>
-			<xsd:enumeration value="Reissue"/>
-			<xsd:enumeration value="Reprice"/>
-			<xsd:enumeration value="Update"/>
+			<xsd:pattern value="[0-9a-zA-Z]{1,2}"/>
 		</xsd:restriction>
-	</xsd:simpleType>
-	<xsd:simpleType name="OrderItemActionListType">
-		<xsd:annotation>
-			<xsd:documentation source="description" xml:lang="en">
-        A data type for an Order Action. Examples: Create, Update, Delete, Reissue, Reprice
-      </xsd:documentation>
-		</xsd:annotation>
-		<xsd:union memberTypes="ApplicationSimpleType OrderItemActionSimpleType"/>
 	</xsd:simpleType>
 	<xsd:simpleType name="AlphaNumericStringLength1to3">
 		<xsd:annotation>
@@ -3381,23 +3292,6 @@ Notes: Use of IATA Padis Codeset - List for data element GZO (Geographical Zone)
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
 			<xsd:pattern value="[0-9a-zA-Z]{1,3}"/>
-		</xsd:restriction>
-	</xsd:simpleType>
-	<xsd:simpleType name="Numeric0to99">
-		<xsd:annotation>
-			<xsd:documentation>Use for numeric values, from 0 to 99 inclusive.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:integer">
-			<xsd:minInclusive value="0"/>
-			<xsd:maxInclusive value="99"/>
-		</xsd:restriction>
-	</xsd:simpleType>
-	<xsd:simpleType name="NumericStringLength1to19">
-		<xsd:annotation>
-			<xsd:documentation xml:lang="en">Used for Numeric Strings, length 1 to 19.</xsd:documentation>
-		</xsd:annotation>
-		<xsd:restriction base="xsd:string">
-			<xsd:pattern value="[0-9]{1,19}"/>
 		</xsd:restriction>
 	</xsd:simpleType>
 	<xsd:simpleType name="AlphaLength3">
@@ -3433,5 +3327,46 @@ Notes: Use of IATA Padis Codeset - List for data element GZO (Geographical Zone)
 		<xsd:restriction base="xsd:string">
 			<xsd:pattern value="[0-9a-zA-Z]{1,4}"/>
 		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="Numeric0to99">
+		<xsd:annotation>
+			<xsd:documentation>Use for numeric values, from 0 to 99 inclusive.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:integer">
+			<xsd:minInclusive value="0"/>
+			<xsd:maxInclusive value="99"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="NumericStringLength1to19">
+		<xsd:annotation>
+			<xsd:documentation xml:lang="en">Used for Numeric Strings, length 1 to 19.</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="[0-9]{1,19}"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="OrderItemActionSimpleType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">
+        A data type for an Order Action list constraint. Examples: Cancel, Create, Divide, Delete, Reissue, Reprice, Update
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="Cancel"/>
+			<xsd:enumeration value="Create"/>
+			<xsd:enumeration value="Delete"/>
+			<xsd:enumeration value="Divide"/>
+			<xsd:enumeration value="Reissue"/>
+			<xsd:enumeration value="Reprice"/>
+			<xsd:enumeration value="Update"/>
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="OrderItemActionListType">
+		<xsd:annotation>
+			<xsd:documentation source="description" xml:lang="en">
+        A data type for an Order Action. Examples: Create, Update, Delete, Reissue, Reprice
+      </xsd:documentation>
+		</xsd:annotation>
+		<xsd:union memberTypes="ApplicationSimpleType OrderItemActionSimpleType"/>
 	</xsd:simpleType>
 </xsd:schema>
