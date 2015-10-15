@@ -13,6 +13,8 @@
   <packaging>jar</packaging>
   <version>0.1.0-SNAPSHOT</version>
   <name>NDC Client</name>
+  <description>NDC Client for calling services implmenting IATA NDC standard</description>
+  <url>https://github.com/iata-ndc/ndc-java-sdk</url>
 
   <build>
     <plugins>
