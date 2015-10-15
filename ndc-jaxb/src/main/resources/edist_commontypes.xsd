@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- edited with XMLSpy v2013 rel. 2 (x64) (http://www.altova.com) by PIA MAESTRONI (IATA) -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.000" id="IATA2015.2">
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"  xmlns="http://www.iata.org/IATA/EDIST" targetNamespace="http://www.iata.org/IATA/EDIST" elementFormDefault="qualified" attributeFormDefault="unqualified" version="2.000" id="IATA2015.2">
 	<xsd:annotation>
 		<xsd:documentation xml:lang="en">EDIST XML SPECIFICATION: Common XML Objects shared by all EDIST Domains.</xsd:documentation>
 	</xsd:annotation>
