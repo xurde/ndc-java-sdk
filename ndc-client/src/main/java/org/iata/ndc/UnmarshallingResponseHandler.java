@@ -19,7 +19,7 @@ class UnmarshallingResponseHandler<T> extends AbstractResponseHandler<T> impleme
 	@SuppressWarnings("unchecked")
 	private T unmarshallRequest(InputStream response) {
 		try {
-			JAXBContext context = JAXBContext.newInstance("org.iata.ndc.schema");
+			JAXBContext context = NdcClient.getJaxbContext();
 			Unmarshaller unmarshaller = context.createUnmarshaller();
 			return (T) unmarshaller.unmarshal(response);
 		} catch (JAXBException e) {

@@ -24,6 +24,8 @@ public class NdcClient {
 	private static final String VERSION = "0.1.0";
 	/** User agent passed to server */
 	private static final String USER_AGENT = "NDC Java Wrapper / " + VERSION;
+	/** JaxbContext for NDC schema*/
+	private static final JAXBContext context = null;
 	/** Server URL */
 	private final String url;
 	/** Authorization key */
@@ -197,8 +199,7 @@ public class NdcClient {
 	 */
 	private <T> String marshallRequest(T request) throws ClientException {
 		try {
-			JAXBContext context = JAXBContext.newInstance("org.iata.ndc.schema");
-			Marshaller marshaller = context.createMarshaller();
+			Marshaller marshaller = getJaxbContext().createMarshaller();
 			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
 			StringWriter writer = new StringWriter();
 			marshaller.marshal(request, writer);
@@ -229,5 +230,22 @@ public class NdcClient {
 				.bodyString(request, contentType)
 				.execute()
 				.handleResponse(new UnmarshallingResponseHandler<T>());
+	}
+
+	/**
+	 * Returns JAXBContext for IATA NDC Schema.
+	 * Creates the context if it does not exist.
+	 *
+	 * @return JAXBContext instance representing NDC schema
+	 * @throws ClientException if context creation failed.
+	 */
+	public static JAXBContext getJaxbContext() throws ClientException {
+		if (context != null) return context;
+		try {
+			return JAXBContext.newInstance("org.iata.ndc.schema");
+		} catch (JAXBException e) {
+			LOG.error("Failure creating JAXB context", e);
+			throw new ClientException(e);
+		}
 	}
 }
