@@ -9,7 +9,7 @@ It's host-agnostic so it can point to any NDC host.
 Add the following dependency to your project's dependencies
 ```
     <dependency>
-      <groupId>org.iata</groupId>
+      <groupId>org.iata.ndc</groupId>
       <artifactId>ndc-client</artifactId>
       <version>0.1.0</version>
       <scope>compile</scope>
@@ -19,7 +19,7 @@ Add the following dependency to your project's dependencies
 ### Using Gradle
 Add the following dependency to your `dependencies` section
 ```
-        compile 'org.iata:ndc-client:0.1.0'
+        compile 'org.iata.ndc:ndc-client:0.1.0'
 ```
 
 ### Manual installation
@@ -28,7 +28,7 @@ Run the following command:
 ```
 git clone https://github.com/iata-ndc/ndc-java-sdk.git
 cd ndc-java-sdk
-mvn install
+mvn install -Dapi.key=<your api key>
 ```
 Then add maven dependency as usual
 
@@ -44,7 +44,7 @@ builder.addOriginDestination("CDG", "LHR", date);
 builder.addAirlinePreference("C9");
 AirShoppingRQ request = builder.build();
 
-NdcClient client = new NdcClient("http://kronos.jrtechnologies.com/dondc");
+NdcClient client = new NdcClient("http://iata.api.mashery.com/kronos/api", "YOUR_API_KEY_HERE");
 AirShoppingRS response = null;
 try {
 	response = client.airShopping(request);
@@ -52,5 +52,7 @@ try {
 	<handle exception>
 }
 ```
+*NOTE:* At the moment only AirShoppingRQBuilder is available.
+All other requests can be constructed manually, using ObjectFactory in org.iata.ndc.schema package.
 
 This should return AirShoppingRS object, which contains response data.
