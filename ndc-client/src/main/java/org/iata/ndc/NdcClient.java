@@ -151,6 +151,19 @@ public class NdcClient {
 	}
 
 	/**
+	 * Sends OrderChange request to server, receives and processes the response.
+	 *
+	 * @param orderChangeRQ request Object
+	 * @return OrderViewRS instance containing the response from server
+	 * @throws ClientProtocolException if HTTP protocol exception is encountered during service call
+	 * @throws IOException if error is encountered while processing server response
+	 * @throws ClientException if marshalling the request or unmarshalling server response to Java Object fails
+	 */
+	public OrderViewRS orderChange(OrderChangeRQ orderChangeRQ) throws ClientProtocolException, IOException, ClientException {
+		return marshalAndSend(orderChangeRQ, "OrderChange");
+	}
+
+	/**
 	 * Sends OrderCancel request to server, receives and processes the response.
 	 *
 	 * @param orderCancelRQ request Object
