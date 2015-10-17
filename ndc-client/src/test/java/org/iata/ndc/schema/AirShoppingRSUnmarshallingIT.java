@@ -16,7 +16,7 @@ import org.junit.runners.Parameterized.Parameters;
 @RunWith(Parameterized.class)
 public class AirShoppingRSUnmarshallingIT extends AbstractUnmarshaller<AirShoppingRS> {
 
-	@Parameters(name = "{index}: {0} {1}")
+	@Parameters(name = "{index}: {0}")
 	public static Collection<String[]> sampleFiles() {
 		return Arrays.asList(new String[][] {
 			{"/Athena/OneWay/AirShoppingRS - ARN-LHR OneWay with one pax.xml", "1#M#111198795#111162714"},
