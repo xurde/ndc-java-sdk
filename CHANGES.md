@@ -1,6 +1,6 @@
 # Changes
 
-## 0.1.2-SNAPSHOT
+## 0.1.2
 * Add orderChange call to NdcClient
 * Add clear method to AirShoppingRQBuilder
 * Add JavaDocs to AirShoppingRQBuilder

@@ -11,7 +11,7 @@ Add the following dependency to your project's dependencies
     <dependency>
       <groupId>org.iata.ndc</groupId>
       <artifactId>ndc-client</artifactId>
-      <version>0.1.0</version>
+      <version>0.1.2</version>
       <scope>compile</scope>
     </dependency>
 ```
@@ -19,7 +19,7 @@ Add the following dependency to your project's dependencies
 ### Using Gradle
 Add the following dependency to your `dependencies` section
 ```
-        compile 'org.iata.ndc:ndc-client:0.1.0'
+        compile 'org.iata.ndc:ndc-client:0.1.2'
 ```
 
 ### Manual installation
@@ -37,7 +37,7 @@ Then add maven dependency as usual
 Add ndc-client to project dependencies
 
 Request sample
-```
+```java
 AirShoppingRQBuilder builder = new AirShoppingRQBuilder();
 builder.addTravelAgencySender("Test agency", "0000XXXX", "test agent");
 builder.addOriginDestination("CDG", "LHR", date);
@@ -52,7 +52,8 @@ try {
 	<handle exception>
 }
 ```
-*NOTE:* At the moment only AirShoppingRQBuilder is available.
+**NOTE:** At the moment only AirShoppingRQBuilder is available.
 All other requests can be constructed manually, using ObjectFactory in org.iata.ndc.schema package.
+New common element builders will be added to org.iata.ndc.builder.element package.
 
 This should return AirShoppingRS object, which contains response data.
