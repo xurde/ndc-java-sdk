@@ -1,9 +1,8 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.iata.ndc</groupId>
   <artifactId>ndc-parent-pom</artifactId>
-  <version>0.1.1</version>
+  <version>0.1.2</version>
   <packaging>pom</packaging>
   <name>NDC Client parent POM</name>
   <description>Parent pom for ndc-java-sdk</description>
@@ -45,6 +44,11 @@
   <profiles>
     <profile>
       <id>release</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+        </property>
+      </activation>
       <build>
         <plugins>
           <plugin>
@@ -66,6 +70,10 @@
 
   <build>
     <plugins>
+      <plugin>
+        <groupId>external.atlassian.jgitflow</groupId>
+        <artifactId>jgitflow-maven-plugin</artifactId>
+      </plugin>
       <plugin>
         <groupId>org.sonatype.plugins</groupId>
         <artifactId>nexus-staging-maven-plugin</artifactId>
@@ -181,6 +189,19 @@
             <serverId>ossrh</serverId>
             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
             <autoReleaseAfterClose>false</autoReleaseAfterClose>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>external.atlassian.jgitflow</groupId>
+          <artifactId>jgitflow-maven-plugin</artifactId>
+          <version>1.0-m5.1</version>
+          <configuration>
+            <flowInitContext>
+              <developBranchName>development</developBranchName>
+            </flowInitContext>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <alwaysUpdateOrigin>false</alwaysUpdateOrigin>
+            <localOnly>true</localOnly>
           </configuration>
         </plugin>
       </plugins>
