@@ -6,6 +6,7 @@ import java.util.*;
 import javax.xml.datatype.*;
 
 import org.iata.ndc.ClientException;
+import org.iata.ndc.builder.element.PartyBuilder;
 import org.iata.ndc.schema.*;
 import org.iata.ndc.schema.AirShopReqAttributeQueryTypeOriginDestination.CalendarDates;
 import org.iata.ndc.schema.FarePreferencesType.Type;
@@ -91,20 +92,16 @@ public class AirShoppingRQBuilder {
 	 * If both this method and {@link #setParty(MsgPartiesType)} are called, party data will be set.
 	 * Sender in the party will be overridden by one created in {@link #addTravelAgencySender(String, String, String)}
 	 *
+	 * <p> Consider using {@link #setParty(MsgPartiesType)} with {@link PartyBuilder}.
+	 *
 	 * @param name Travel agency name
-	 * @param iataNumber
-	 * @param agencyId
+	 * @param iataNumber IATA number for the agency
+	 * @param agencyId agency ID
 	 * @return current builder instance
 	 */
 	public AirShoppingRQBuilder addTravelAgencySender(String name, String iataNumber, String agencyId) {
-		sender = factory.createMsgPartiesTypeSender();
-		TravelAgencySenderType agency = factory.createTravelAgencySenderType();
-		agency.setName(name);
-		agency.setIATANumber(iataNumber);
-		AgencyIDType agencyIDType = factory.createAgencyIDType();
-		agencyIDType.setValue(agencyId);
-		agency.setAgencyID(agencyIDType);
-		sender.setTravelAgencySender(agency);
+		MsgPartiesType p = new PartyBuilder().setTravelAgencySender(name, iataNumber, agencyId).build();
+		sender = p.getSender();
 		return this;
 	}
 
