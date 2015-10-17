@@ -7,15 +7,20 @@ import java.math.BigInteger;
 import java.util.*;
 
 import javax.xml.bind.*;
+import javax.xml.namespace.QName;
 
 import org.iata.ndc.builder.AirShoppingRQBuilder.Traveler;
 import org.iata.ndc.schema.*;
+import org.iata.ndc.schema.MsgPartiesType.Participants;
+import org.iata.ndc.schema.MsgPartiesType.Participants.Participant;
 import org.iata.ndc.schema.TravelerCoreType.PTC;
 import org.junit.Before;
 import org.junit.Test;
 
 public class AirShoppingRQBuilderTest {
+	private static final ObjectFactory factory = new ObjectFactory();
 	private AirShoppingRQBuilder testedClass;
+
 
 	@Before
 	public void setUp() {
@@ -27,6 +32,37 @@ public class AirShoppingRQBuilderTest {
 		AirShoppingRQ request = testedClass.build();
 		assertEquals("1.0", request.getDocument().getReferenceVersion());
 		assertEquals("NDC AirShoppingRQ Message", request.getDocument().getName());
+	}
+
+	@Test
+	public void setParty() {
+		MsgPartiesType party = Initializer.getObject(MsgPartiesType.class);
+		Participants participants = factory.createMsgPartiesTypeParticipants();
+		party.setParticipants(new JAXBElement<MsgPartiesType.Participants>(new QName("Participants"), Participants.class, participants));
+		Participant participant = Initializer.getObject(Participant.class);
+		EnabledSysParticipantType enabled = factory.createEnabledSysParticipantType();
+		enabled.setName("Enabled System");
+		participant.setEnabledSystemParticipant(enabled);
+		party.getParticipants().getValue().getParticipant().add(participant);
+		AirShoppingRQ request = testedClass.setParty(party).build();
+		assertEquals("Enabled System", request.getParty().getParticipants().getValue().getParticipant().get(0).getEnabledSystemParticipant().getName());
+	}
+
+	@Test
+	public void setPartyAddSenderReturnsPartyWithSenderOverridden() {
+		MsgPartiesType party = Initializer.getObject(MsgPartiesType.class);
+		Participants participants = factory.createMsgPartiesTypeParticipants();
+		party.setParticipants(new JAXBElement<MsgPartiesType.Participants>(new QName("Participants"), Participants.class, participants));
+		Participant participant = Initializer.getObject(Participant.class);
+		EnabledSysParticipantType enabled = factory.createEnabledSysParticipantType();
+		enabled.setName("Enabled System");
+		participant.setEnabledSystemParticipant(enabled);
+		party.getParticipants().getValue().getParticipant().add(participant);
+
+		AirShoppingRQ request = testedClass.setParty(party).addTravelAgencySender("a", "b", "c").build();
+
+		assertEquals("Enabled System", request.getParty().getParticipants().getValue().getParticipant().get(0).getEnabledSystemParticipant().getName());
+		assertEquals("a", request.getParty().getSender().getTravelAgencySender().getName());
 	}
 
 	@Test

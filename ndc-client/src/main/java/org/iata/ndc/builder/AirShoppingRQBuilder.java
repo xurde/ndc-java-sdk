@@ -13,9 +13,15 @@ import org.iata.ndc.schema.FlightDepartureType.AirportCode;
 import org.iata.ndc.schema.MsgPartiesType.Sender;
 import org.iata.ndc.schema.TravelerCoreType.PTC;
 
-
+/**
+ * This class provides a simple way to create AirShoppingRQ objects. It implements fluent interface, thus allowing to chain methods.<br>
+ * Since the object returned by {@link #build build()} can be modified any further customization can be performed manually.
+ */
 public class AirShoppingRQBuilder {
 
+	/**
+	 * Traveler enum represents possible traveler types.
+	 */
 	public enum Traveler {
 		/** Adult */
 		ADT,
@@ -31,17 +37,34 @@ public class AirShoppingRQBuilder {
 		GST
 	};
 
-	private AirShoppingRQ request;
 	private static final ObjectFactory factory = new ObjectFactory();
+
+	private AirShoppingRQ request;
 
 	private Map<Traveler, Integer> anonymousTravelers;
 	private Sender sender;
+	private MsgPartiesType party;
 
 	private Set<String> airlines;
 	private Set<String> fares;
 	private Set<String> cabins;
 
+	/**
+	 * Creates a new instance of AirShoppingRQBuilder.
+	 * A new instance can be created for each request or you can use the {@link #clear() clear()} method.<br>
+	 *
+	 * Defaults:<ol>
+	 * <li> One adult traveler.
+	 * </ol>
+	 */
 	public AirShoppingRQBuilder() {
+		clear();
+	}
+
+	/**
+	 * Re-initializes builder to empty state.
+	 */
+	public void clear() {
 		anonymousTravelers = new HashMap<AirShoppingRQBuilder.Traveler, Integer>();
 		airlines = new LinkedHashSet<String>();
 		fares = new LinkedHashSet<String>();
@@ -49,8 +72,30 @@ public class AirShoppingRQBuilder {
 
 		request = Initializer.getObject(AirShoppingRQ.class);
 		sender = null;
+		party = null;
 	}
 
+	/**
+	 * Sets a pre-built MsgPartiesType object to the request.
+	 * @param party object which represents Party node
+	 * @return current builder instance
+	 */
+	public AirShoppingRQBuilder setParty(MsgPartiesType party) {
+		this.party = party;
+		return this;
+	}
+
+	/**
+	 * Creates TravelAgencySender representation and sets it as request sender.
+	 * Second invocation will override previous value.<br>
+	 * If both this method and {@link #setParty(MsgPartiesType)} are called, party data will be set.
+	 * Sender in the party will be overridden by one created in {@link #addTravelAgencySender(String, String, String)}
+	 *
+	 * @param name Travel agency name
+	 * @param iataNumber
+	 * @param agencyId
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addTravelAgencySender(String name, String iataNumber, String agencyId) {
 		sender = factory.createMsgPartiesTypeSender();
 		TravelAgencySenderType agency = factory.createTravelAgencySenderType();
@@ -63,10 +108,25 @@ public class AirShoppingRQBuilder {
 		return this;
 	}
 
+	/**
+	 * Adds anonymous traveler of type {@link Traveler} to traveler list.<br>
+	 * <strong>Note:</strong> if this type of traveler already exists, increments the count for this type of traveler.
+	 *
+	 * @param traveler type of traveler
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addAnonymousTraveler(Traveler traveler) {
 		return addAnonymousTravelers(traveler, 1);
 	}
 
+	/**
+	 * Adds multiple anonymous travelers of type {@link Traveler} to traveler list.<br>
+	 * <strong>Note:</strong> if this type of traveler already exists, increments the count for this type of traveler.
+	 *
+	 * @param traveler type of traveler
+	 * @param count number of travelers
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addAnonymousTravelers(Traveler traveler, int count) {
 		if (!anonymousTravelers.containsKey(traveler)) {
 			anonymousTravelers.put(traveler, count);
@@ -77,15 +137,38 @@ public class AirShoppingRQBuilder {
 		return this;
 	}
 
+	/**
+	 * Adds prebuilt {@link AirShopReqAttributeQueryTypeOriginDestination} instance to the list of OriginDestinations.
+	 * @param originDestination originDestination to add
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addOriginDestination(AirShopReqAttributeQueryTypeOriginDestination originDestination) {
 		request.getCoreQuery().getOriginDestinations().add(originDestination);
 		return this;
 	}
 
+	/**
+	 * Creates a new instance of {@link AirShopReqAttributeQueryTypeOriginDestination} using supplied data and adds it to the list of OriginDestinations.
+	 * @param origin three letter airport code for the departure airport
+	 * @param destination three letter airport code for the arrival airport
+	 * @param date date of the flight
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addOriginDestination(String origin, String destination, Date date) {
 		return addOriginDestination(origin, destination, date, 0, 0);
 	}
 
+	/**
+	 * Creates a new instance of {@link AirShopReqAttributeQueryTypeOriginDestination} using supplied data and adds it to the list of OriginDestinations.
+	 * This method allows to specify a period of dates when the flight date is flexible.
+	 *
+	 * @param origin three letter airport code for the departure airport
+	 * @param destination three letter airport code for the arrival airport
+	 * @param date date of the flight
+	 * @param daysBefore request flights for a period of daysBefore before the specified flight date
+	 * @param daysAfter request flights for a period of daysAfter after the specified flight date
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addOriginDestination(String origin, String destination, Date date, int daysBefore, int daysAfter) {
 		AirShopReqAttributeQueryTypeOriginDestination originDestination = Initializer.getObject(AirShopReqAttributeQueryTypeOriginDestination.class);
 
@@ -106,24 +189,43 @@ public class AirShoppingRQBuilder {
 	}
 
 
+	/**
+	 * Adds airline preference to the set of preferred airlines.
+	 * @param airlineId two letter code for the airline
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addAirlinePreference(String airlineId) {
 		airlines.add(airlineId);
 
 		return this;
 	}
 
+	/**
+	 * Adds preferred fare code to the set of fare preferences.
+	 * @param fareCode fare code
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addFarePreference(String fareCode) {
 		fares.add(fareCode);
 
 		return this;
 	}
 
+	/**
+	 * Adds cabin preference to the set of cabin preferences
+	 * @param cabinCode
+	 * @return current builder instance
+	 */
 	public AirShoppingRQBuilder addCabinPreference(String cabinCode) {
 		cabins.add(cabinCode);
 
 		return this;
 	}
 
+	/**
+	 * Builds AirShoppingRQ instance and returns it.
+	 * @return constructed AirShoppingRQ instance
+	 */
 	public AirShoppingRQ build() {
 		setDefaults();
 
@@ -193,8 +295,9 @@ public class AirShoppingRQBuilder {
 	}
 
 	private void addPartyNode() {
-		MsgPartiesType party = factory.createMsgPartiesType();
-
+		if (party == null) {
+			party = factory.createMsgPartiesType();
+		}
 		party.setSender(sender);
 
 		request.setParty(party);
