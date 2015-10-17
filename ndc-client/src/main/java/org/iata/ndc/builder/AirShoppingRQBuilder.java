@@ -5,7 +5,6 @@ import java.util.*;
 
 import javax.xml.datatype.*;
 
-import org.apache.commons.codec.digest.DigestUtils;
 import org.iata.ndc.ClientException;
 import org.iata.ndc.schema.*;
 import org.iata.ndc.schema.AirShopReqAttributeQueryTypeOriginDestination.CalendarDates;
@@ -222,23 +221,6 @@ public class AirShoppingRQBuilder {
 
 	private void addRequestAttributes() {
 		request.setVersion("1.1.5");
-		XMLGregorianCalendar xmlgc = toUTC(new GregorianCalendar());
-		request.setTimeStamp(xmlgc);
-		request.setEchoToken(byteToHex(DigestUtils.sha1(xmlgc.toString())));
-	}
-
-	private static XMLGregorianCalendar toUTC(GregorianCalendar gregorianCalendar) {
-		XMLGregorianCalendar xmlgc = null;
-		DatatypeFactory df = null;
-		try {
-			df = DatatypeFactory.newInstance();
-		} catch (DatatypeConfigurationException e) {
-			throw new ClientException(e);
-		}
-		xmlgc = df.newXMLGregorianCalendar(gregorianCalendar);
-		xmlgc = xmlgc.normalize();
-		xmlgc.setMillisecond(DatatypeConstants.FIELD_UNDEFINED);
-		return xmlgc;
 	}
 
 	private static XMLGregorianCalendar getDate(Date date) {
@@ -258,15 +240,5 @@ public class AirShoppingRQBuilder {
 		xmlgc.setHour(DatatypeConstants.FIELD_UNDEFINED);
 		xmlgc.setTimezone(DatatypeConstants.FIELD_UNDEFINED);
 		return xmlgc;
-	}
-
-	private static String byteToHex(final byte[] hash) {
-		Formatter formatter = new Formatter();
-		for (byte b : hash) {
-			formatter.format("%02x", b);
-		}
-		String result = formatter.toString();
-		formatter.close();
-		return result;
 	}
 }
