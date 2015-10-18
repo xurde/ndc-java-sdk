@@ -3,14 +3,14 @@
   <parent>
     <groupId>org.iata.ndc</groupId>
     <artifactId>ndc-parent-pom</artifactId>
-    <version>0.1.4</version>
+    <version>0.1.5-SNAPSHOT</version>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.iata.ndc</groupId>
   <artifactId>ndc-jaxb</artifactId>
   <packaging>jar</packaging>
-  <version>0.1.4</version>
+  <version>0.1.5-SNAPSHOT</version>
   <name>JAXB classes for NDC Client</name>
   <description>JAXB generated classes for NDC Client</description>
   <url>https://github.com/iata-ndc/ndc-java-sdk</url>
