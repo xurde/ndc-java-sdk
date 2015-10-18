@@ -1,5 +1,9 @@
 # Changes
 
+## 0.1.4
+* Add ServiceListRQBuilder
+* Add ServicePriceRQBuilder
+
 ## 0.1.3
 * Add DataListBuilder
 * Add SeatAvailabilityRQBuilder
