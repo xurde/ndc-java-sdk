@@ -1,5 +1,9 @@
 # Changes
 
+## 0.1.3
+* Add DataListBuilder
+* Add SeatAvailabilityRQBuilder
+
 ## 0.1.2
 * Add orderChange call to NdcClient
 * Add clear method to AirShoppingRQBuilder
