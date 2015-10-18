@@ -11,7 +11,7 @@ Add the following dependency to your project's dependencies
     <dependency>
       <groupId>org.iata.ndc</groupId>
       <artifactId>ndc-client</artifactId>
-      <version>0.1.3</version>
+      <version>0.1.4</version>
       <scope>compile</scope>
     </dependency>
 ```
@@ -19,7 +19,7 @@ Add the following dependency to your project's dependencies
 ### Using Gradle
 Add the following dependency to your `dependencies` section
 ```
-        compile 'org.iata.ndc:ndc-client:0.1.3'
+        compile 'org.iata.ndc:ndc-client:0.1.4'
 ```
 
 ### Manual installation
@@ -52,7 +52,11 @@ try {
 	<handle exception>
 }
 ```
-**NOTE:** At the moment only AirShoppingRQBuilder and SeatAvailabilityRQ are available.
+**NOTE:** At the moment only available builders are:
+* AirShoppingRQBuilder
+* SeatAvailabilityRQBuilder
+* ServiceListRQBuilder 
+* ServicePriceRQBuilder
 All other requests can be constructed manually, using ObjectFactory in org.iata.ndc.schema package.
 New common element builders will be added to org.iata.ndc.builder.element package.
 
