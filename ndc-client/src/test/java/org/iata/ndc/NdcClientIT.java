@@ -128,7 +128,25 @@ public class NdcClientIT {
 	}
 
 	@Test
-	public void f_serviceRQ() {
+	public void f_serviceListRQ() {
+		String shoppingResponseId = airSoppingRS.getShoppingResponseIDs().getResponseID().getValue();
+		ServiceListRQ request = new ServiceListRQBuilder()
+				.setParty(party)
+				.setShoppingResponseId(shoppingResponseId)
+				.build();
+		ServiceListRS response = null;
+		try {
+			response = client.serviceList(request);
+		} catch (IOException e) {
+			LOG.error("Unexpected exception encountered during service call", e);
+			fail(e.toString());
+		}
+		processErrors(response.getErrors());
+		assertNotNull(response.getSuccess());
+	}
+
+	@Test
+	public void g_servicePriceRQ() {
 		String shoppingResponseId = airSoppingRS.getShoppingResponseIDs().getResponseID().getValue();
 		ServicePriceRQ request = new ServicePriceRQBuilder()
 				.setParty(party)
@@ -143,8 +161,9 @@ public class NdcClientIT {
 		}
 		processErrors(response.getErrors());
 		assertNotNull(response.getSuccess());
-
 	}
+
+
 
 	private void processErrors(List<ErrorType> errors) {
 		if (errors == null || errors.isEmpty()) {
