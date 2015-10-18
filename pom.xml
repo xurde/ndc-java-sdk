@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.iata.ndc</groupId>
   <artifactId>ndc-parent-pom</artifactId>
-  <version>0.1.2</version>
+  <version>0.1.3</version>
   <packaging>pom</packaging>
   <name>NDC Client parent POM</name>
   <description>Parent pom for ndc-java-sdk</description>
@@ -188,7 +188,7 @@
           <configuration>
             <serverId>ossrh</serverId>
             <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-            <autoReleaseAfterClose>false</autoReleaseAfterClose>
+            <autoReleaseAfterClose>true</autoReleaseAfterClose>
           </configuration>
         </plugin>
         <plugin>

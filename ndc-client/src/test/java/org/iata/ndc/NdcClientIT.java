@@ -5,25 +5,42 @@ import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 import javax.xml.bind.*;
 
 import org.iata.ndc.builder.AirShoppingRQBuilder;
-import org.iata.ndc.schema.AirShoppingRQ;
-import org.iata.ndc.schema.AirShoppingRS;
-import org.junit.Test;
+import org.iata.ndc.builder.SeatAvailabilityRQBuilder;
+import org.iata.ndc.builder.element.DataListBuilder;
+import org.iata.ndc.builder.element.PartyBuilder;
+import org.iata.ndc.schema.*;
+import org.iata.ndc.schema.AirShoppingRS.DataLists;
+import org.iata.ndc.schema.DataListType.Flight;
+import org.junit.*;
+import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class NdcClientIT {
 	private static final Logger LOG = LoggerFactory.getLogger(NdcClientIT.class);
 	private final String server = System.getProperty("server.url");
 	private final String apiKey = System.getProperty("api.key");
+	private final NdcClient client = new NdcClient(server, apiKey);
+
+	private MsgPartiesType party;
+	private static AirShoppingRS airSoppingRS;
+
+	@Before
+	public void before() {
+		party = new PartyBuilder()
+				.setTravelAgencySender("Test sender", "00002004", "test")
+				.build();
+
+	}
 
 	@Test
-	public void serverIsSet() {
+	public void a_serverIsSet() {
 		if (server == null) {
 			String msg = "System property server.uri is not set.";
 			LOG.error(msg);
@@ -32,7 +49,7 @@ public class NdcClientIT {
 	}
 
 	@Test
-	public void apiKeyIsSet() {
+	public void b_apiKeyIsSet() {
 		if (server == null) {
 			String msg = "System property api.key is not set.";
 			LOG.error(msg);
@@ -41,13 +58,12 @@ public class NdcClientIT {
 	}
 
 	@Test
-	public void existingRequestAgainstServer() throws JAXBException {
+	public void c_existingAirShoppingRQ() throws JAXBException {
 		InputStream is = this.getClass().getResourceAsStream("/Kronos/OneWay/AirShoppingRQ - OneWay with one pax.xml");
 		JAXBContext context = JAXBContext.newInstance("org.iata.ndc.schema");
 		Unmarshaller unmarshaller = context.createUnmarshaller();
 		AirShoppingRQ airShoppingRQ =  (AirShoppingRQ) unmarshaller.unmarshal(is);
 
-		NdcClient client = new NdcClient(server, apiKey);
 		AirShoppingRS response = null;
 		try {
 			response = client.airShopping(airShoppingRQ);
@@ -59,21 +75,20 @@ public class NdcClientIT {
 	}
 
 	@Test
-	public void builtRequestAgainstServer() {
+	public void d_builtAirShoppingRQ() {
 		Calendar cal = Calendar.getInstance();
 		cal.clear();
 		cal.set(2015, 10, 19);
 		Date date = cal.getTime();
 
-		AirShoppingRQBuilder builder = new AirShoppingRQBuilder();
-		builder.addTravelAgencySender("Test sender", "00002004", "test");
-		builder.addOriginDestination("CDG", "LHR", date, 3, 3);
-		builder.addAirlinePreference("C9");
-		builder.addCabinPreference("M");
-		builder.addFarePreference("759");
-		AirShoppingRQ request = builder.build();
+		AirShoppingRQ request = new AirShoppingRQBuilder()
+				.setParty(party)
+				.addOriginDestination("CDG", "LHR", date, 3, 3)
+				.addAirlinePreference("C9")
+				.addCabinPreference("M")
+				.addFarePreference("759")
+				.build();
 
-		NdcClient client = new NdcClient(server, apiKey);
 		AirShoppingRS response = null;
 		try {
 			response = client.airShopping(request);
@@ -81,7 +96,54 @@ public class NdcClientIT {
 			LOG.error("Unexpected exception encountered during service call", e);
 			fail(e.toString());
 		}
+		airSoppingRS = response;
 		assertNotNull(response.getSuccess());
+	}
+
+	@Test
+	public void e_builtSeatAvailabilityRQ() {
+		DataLists lists = airSoppingRS.getDataLists();
+		OriginDestination originDestination = lists.getOriginDestinationList().get(0);
+		Flight flight = DataListBuilder
+				.getObjectListFromReferenceList(originDestination.getFlightReferences().getValue(), Flight.class).get(0);
+
+		DataListType dataList = new DataListBuilder()
+				.setDataListForSeatAvailability(originDestination, flight, "M")
+				.build();
+
+		SeatAvailabilityRQ request = new SeatAvailabilityRQBuilder()
+				.setParty(party)
+				.setDataList(dataList)
+				.addOriginDestinationToQuery(dataList.getOriginDestinationList().get(0))
+				.build();
+
+		SeatAvailabilityRS response = null;
+		try {
+			response = client.seatAvailability(request);
+		} catch (IOException e) {
+			LOG.error("Unexpected exception encountered during service call", e);
+			fail(e.toString());
+		}
+		processErrors(response.getErrors());
+		assertNotNull(response.getSuccess());
+	}
+
+	private void processErrors(List<ErrorType> errors) {
+		if (errors == null || errors.isEmpty()) {
+			return;
+		}
+		String message = "";
+		for (ErrorType e : errors) {
+			if (e.getValue() != null && !e.getValue().isEmpty()) {
+				message += e.getValue();
+				LOG.error(e.getValue());
+			}
+			if (e.getShortText() != null && !e.getShortText().isEmpty()) {
+				message += e.getShortText();
+				LOG.error(e.getShortText());
+			}
+		}
+		fail("Server returned errors");
 	}
 
 }
